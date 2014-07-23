@@ -34,3 +34,31 @@ A lightweight helping tool for Agile software developing.
 
 ## Class diagram
 ![](https://raw.githubusercontent.com/nerfologist/docs/master/images/class_diagram.png)
+
+## Glossary
+
+- Backlog (tab): container for stories, prioritised
+- Current (tab): container for stories that are to be addressed in the current time unit (week? day?)
+- Done (tab): container for completed stories
+- Icebox (tab): new stories are created here
+- Point: unit of complexity, used for evaluating stories
+- Project: activity that we want to track. Can be divided in stories
+- Story: synthetic description of a use case. Its complexity can be evaluated in points. Also: a concrete or deliverable task
+- Tab: container for stories
+- Velocity: points that can be completed at every time unit.
+
+## Planned features
+- account creation/auth
+- user can create projects (user becomes project manager (PM) of his own projects)
+- projects come with four tabs (story containers): current, backlog, icebox, done
+- user can create stories. Stories are created in the icebox tab
+- Current tab must contain the current stories at all times
+- user can evaluate the complexity of stories from "1: trivial" to "4: very complex"
+- user can start, finish deliver, accept or reject stories
+- user can set stories' priority (only for stories that have not been started yet)
+- user can set a velocity. A default velocity must be assumed
+
+
+### Optional features
+- user can invite other users to collaborate on his project
+- user has an event timeline
