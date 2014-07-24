@@ -24,3 +24,7 @@ group :development do
   gem 'debugger'
   gem 'pry-rails'
 end
+
+group :production do
+  gem 'rails_12factor'
+end
