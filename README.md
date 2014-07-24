@@ -60,5 +60,6 @@ A lightweight helping tool for Agile software developing.
 
 
 ### Optional features
+- variable time unit length (week, day, month)
 - user can invite other users to collaborate on his project
 - user has an event timeline

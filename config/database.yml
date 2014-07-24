@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: PivotalTrackerClone_production
-  username: PivotalTrackerClone
-  password: <%= ENV['PIVOTALTRACKERCLONE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
