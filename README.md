@@ -13,8 +13,8 @@ Current herokuapp website: http://litetracker.herokuapp.com/
   - session controller ✓
   - project model & controller ✓
   - tab model & controller ✓
-  - story model & controller ✓
-  - sane API, well defined routes ✓
+  - story model & controller
+  - sane API, well defined routes
 2. Backbone
   - project model & view structure (paper template first)
   - projects collection. Top-level projects collection.
@@ -30,6 +30,9 @@ Current herokuapp website: http://litetracker.herokuapp.com/
   - drag & drop stories between tabs
 4. Polish
   - CSS and styling (bootstrap)
+  - add a logo
+  - add a captivating homepage
+  - add demo user & seed content
   - DRYing out code
   - fixing quirks
 5. Extra
@@ -55,7 +58,7 @@ Current herokuapp website: http://litetracker.herokuapp.com/
 
 ## Planned features
 - account creation/auth
-- user can create projects (user becomes project manager (PM) of his own projects)
+- user can create projects
 - projects come with four tabs (story containers): current, backlog, icebox, done
 - user can create stories. Stories are created in the icebox tab
 - Current tab must contain the current stories at all times
@@ -67,5 +70,5 @@ Current herokuapp website: http://litetracker.herokuapp.com/
 
 ### Optional features
 - variable time unit length (week, day, month)
-- user can invite other users to collaborate on his project
+- user can invite other users to collaborate on his project (collaboration)
 - user has an event timeline
