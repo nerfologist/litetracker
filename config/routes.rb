@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   resource :session, only: [:new, :create, :destroy]
   
-  namespace :api do
-    resources :projects, only: [:index, :create, :show, :update, :destroy] do
-      resources :tabs, only: [:index, :create, :show, :update, :destroy]
-      resources :stories, only: [:index, :create, :show, :update, :destroy]
+  namespace :api, defauls: { format: :json } do
+    resources :projects, except: [:new, :edit] do
+      resources :tabs, except: [:new, :edit]
+      resources :stories, except: [:new, :edit]
     end
   end
 end

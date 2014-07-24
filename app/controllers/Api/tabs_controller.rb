@@ -5,7 +5,7 @@ class Api::TabsController < ApplicationController
     project = current_user.projects.find_by(id: params[:project_id])
     
     if project
-      render json: project.tabs
+      render json: project.tabs, include: :stories
     else
       render json: ['project not found'], status: 404
     end

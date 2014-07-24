@@ -9,7 +9,7 @@ class Api::ProjectsController < ApplicationController
     project = current_user.projects.find_by(id: params[:id])
     
     if project
-      render json: project, include: :tabs
+      render json: project, include: { tabs: { include: :stories } }
     else
       render json: ['the referenced project was not found'], status: 404
     end

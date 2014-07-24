@@ -1,18 +1,20 @@
 # == Schema Information
 #
-# Table name: projects
+# Table name: stories
 #
 #  id         :integer          not null, primary key
+#  tab_id     :integer
 #  title      :string(255)      not null
-#  owner_id   :integer          not null
-#  velocity   :integer
+#  type       :string(255)
+#  points     :integer
+#  state      :string(255)      not null
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 require 'test_helper'
 
-class ProjectTest < ActiveSupport::TestCase
+class StoryTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

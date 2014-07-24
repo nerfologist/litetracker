@@ -1,11 +1,13 @@
 # == Schema Information
 #
-# Table name: projects
+# Table name: stories
 #
 #  id         :integer          not null, primary key
+#  tab_id     :integer
 #  title      :string(255)      not null
-#  owner_id   :integer          not null
-#  velocity   :integer
+#  type       :string(255)
+#  points     :integer
+#  state      :string(255)      not null
 #  created_at :datetime
 #  updated_at :datetime
 #
@@ -14,10 +16,12 @@
 
 one:
   title: MyString
-  owner_id: 1
-  velocity: 1
+  type: 
+  points: 1
+  state: MyString
 
 two:
   title: MyString
-  owner_id: 1
-  velocity: 1
+  type: 
+  points: 1
+  state: MyString

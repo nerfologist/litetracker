@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  email           :string(255)      not null
+#  password_digest :string(255)      not null
+#  session_token   :string(255)      not null
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
 class User < ActiveRecord::Base
   validates :email, :password_digest, :session_token, presence: true
   validates :email, uniqueness: true
@@ -7,8 +19,9 @@ class User < ActiveRecord::Base
   
   after_initialize :ensure_session_token
   
-  has_many :projects, foreign_key: 'owner_id'
-  has_many :collaborations, class_name: 'ProjectCollaboration', foreign_key: 'user_id'
+  has_many :projects, foreign_key: 'owner_id', dependent: :destroy
+  has_many :collaborations, class_name: 'ProjectCollaboration',
+           foreign_key: 'user_id', dependent: :destroy
   has_many :collaborated_projects, through: :collaborations, source: :project
   
   def self.generate_session_token
