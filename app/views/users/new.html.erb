@@ -1,0 +1,11 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-4 col-md-offset-4'>
+      <h1>Register</h1>
+      <%= render partial: 'form',
+                 locals: { user: @user,
+                           action: users_url,
+                           btn_text: 'Register' } %>
+    </div>
+  </div>
+</div>

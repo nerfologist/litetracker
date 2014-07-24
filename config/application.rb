@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module PivotalTrackerClone
+module LiteTracker
   class Application < Rails::Application
     config.assets.initialize_on_precompile = false
   end
