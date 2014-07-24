@@ -7,7 +7,3 @@ window.LiteTracker = {
     alert('Hello from Backbone!');
   }
 };
-
-$(document).ready(function(){
-  LiteTracker.initialize();
-});
