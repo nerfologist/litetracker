@@ -1,4 +1,5 @@
-# Pivotal Tracker Clone
+# LiteTracker
+## a Pivotal Tracker clone
 A lightweight helping tool for Agile software developing.
 
 Current herokuapp website: http://litetracker.herokuapp.com/
@@ -10,10 +11,10 @@ Current herokuapp website: http://litetracker.herokuapp.com/
 1. Working Rails API
   - user model & controller, auth ✓
   - session controller ✓
-  - project model & controller
-  - tab model & controller
-  - story model & controller
-  - well defined routes
+  - project model & controller ✓
+  - tab model & controller ✓
+  - story model & controller ✓
+  - sane API, well defined routes ✓
 2. Backbone
   - project model & view structure (paper template first)
   - projects collection. Top-level projects collection.
@@ -36,6 +37,9 @@ Current herokuapp website: http://litetracker.herokuapp.com/
 
 ## Class diagram
 ![](https://raw.githubusercontent.com/nerfologist/docs/master/images/class_diagram.png)
+
+## Use case diagram
+![](https://raw.githubusercontent.com/nerfologist/docs/master/images/use_case_diagram.png)
 
 ## Glossary
 

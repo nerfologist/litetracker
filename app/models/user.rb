@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   
   after_initialize :ensure_session_token
   
+  has_many :projects, foreign_key: 'owner_id'
+  has_many :collaborations, class_name: 'ProjectCollaboration', foreign_key: 'user_id'
+  has_many :collaborated_projects, through: :collaborations, source: :project
+  
   def self.generate_session_token
     SecureRandom.urlsafe_base64(16)
   end

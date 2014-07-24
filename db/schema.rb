@@ -11,10 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724040346) do
+ActiveRecord::Schema.define(version: 20140724180417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "project_collaborations", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "project_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "project_collaborations", ["project_id"], name: "index_project_collaborations_on_project_id", using: :btree
+  add_index "project_collaborations", ["user_id", "project_id"], name: "index_project_collaborations_on_user_id_and_project_id", unique: true, using: :btree
+  add_index "project_collaborations", ["user_id"], name: "index_project_collaborations_on_user_id", using: :btree
+
+  create_table "projects", force: true do |t|
+    t.string   "title",      null: false
+    t.integer  "owner_id",   null: false
+    t.integer  "velocity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "projects", ["owner_id", "title"], name: "index_projects_on_owner_id_and_title", unique: true, using: :btree
+  add_index "projects", ["owner_id"], name: "index_projects_on_owner_id", using: :btree
+
+  create_table "tabs", force: true do |t|
+    t.string   "name",       null: false
+    t.integer  "project_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tabs", ["project_id"], name: "index_tabs_on_project_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",           null: false
