@@ -13,8 +13,8 @@ Current herokuapp website: http://litetracker.herokuapp.com/
   - session controller ✓
   - project model & controller ✓
   - tab model & controller ✓
-  - story model & controller
-  - sane API, well defined routes
+  - story model & controller ✓
+  - sane API, well defined routes ✓
 2. Backbone
   - project model & view structure (paper template first)
   - projects collection. Top-level projects collection.
