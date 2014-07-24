@@ -1,5 +1,6 @@
 # Pivotal Tracker Clone
 A lightweight helping tool for Agile software developing.
+
 Current herokuapp website: http://litetracker.herokuapp.com/
 
 ## Current status:
@@ -7,8 +8,8 @@ Current herokuapp website: http://litetracker.herokuapp.com/
 
 ## Next steps:
 1. Working Rails API
-  - user model & controller, auth
-  - session controller
+  - user model & controller, auth ✓
+  - session controller ✓
   - project model & controller
   - tab model & controller
   - story model & controller
