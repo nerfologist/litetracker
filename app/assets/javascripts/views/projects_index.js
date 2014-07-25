@@ -7,13 +7,15 @@ LiteTracker.Views.ProjectsIndex = Backbone.View.extend({
   
   events: {
     'shown.bs.modal div#projectCreationModal' : 'focusTitleInput',
+    'show.bs.modal div#projectDeletionModal' : 'setDeletionTarget',
     'click button#btn-create-project' : 'createProject',
+    'click button#btn-delete-project' : 'deleteProject',
     'submit form' : 'createProject',
     'click a.sortBy' : 'sortBy'
   },
   
   initialize: function (options) {
-    this.listenTo(this.collection, 'sync', this.render);
+    this.listenTo(this.collection, 'sync remove', this.render);
   },
   
   render: function () {
@@ -42,6 +44,27 @@ LiteTracker.Views.ProjectsIndex = Backbone.View.extend({
         that.collection.add(project);
       }
     });
+  },
+  
+  setDeletionTarget: function (event) {
+    var projectId = $(event.relatedTarget).data('project-id');
+    this.$('#btn-delete-project').attr('data-project-id', projectId);
+  },
+  
+  deleteProject: function (event) {
+    var that = this;
+    var projectId = $(event.target).data('project-id');
+    var project = this.collection.get(projectId);
+    
+    $('#projectDeletionModal').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    
+    project.destroy({
+      success: function () {
+        that.collection.remove(project);
+      }
+    })
   },
   
   sortBy: function (event) {
