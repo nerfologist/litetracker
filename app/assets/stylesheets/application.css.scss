@@ -15,7 +15,12 @@
  */
 
 @import "bootstrap";
+@import "font-awesome";
 
 body {
   margin-top: 50px;
+}
+
+div#projectCreationModal {
+  top: 25%;
 }

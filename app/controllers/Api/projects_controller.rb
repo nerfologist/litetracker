@@ -27,7 +27,7 @@ class Api::ProjectsController < ApplicationController
     if project.save
       render json: project, include: :tabs
     else
-      render json: ['unable to create project'], status: :unprocessable_entity
+      render json: project.errors.full_messages, status: :unprocessable_entity
     end
   end
   
@@ -37,7 +37,7 @@ class Api::ProjectsController < ApplicationController
     if project && project.update_attributes(project_params)
       render json: project
     else
-      render json: ['unable to update project'], status: :unprocessable_entity
+      render json: project.errors.full_messages, status: :unprocessable_entity
     end
   end
   

@@ -14,5 +14,5 @@ class Tab < ActiveRecord::Base
   validates :name, uniqueness: { scope: :project_id }
   
   belongs_to :project
-  has_many :stories
+  has_many :stories, dependent: :destroy
 end
