@@ -16,10 +16,13 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
   },
   
   events: {
-    'click a.tab-button': 'toggleTabVisible',
-    'sortupdate div#tabs-row': 'persistTabOrder'
+    'click a.tab-button'               : 'toggleTabVisible',
+    'sortupdate div#tabs-row'          : 'persistTabOrder',
+    'click .btn-create-story'          : 'createStory',
+    'click li#nav-destroy-project'     : 'confirmDeleteProject',
+    'click button#btn-delete-project'  : 'deleteProject'
   },
-  
+
   addTab: function (tab) {
     var tabView = new LiteTracker.Views.TabShow({ model: tab });
     this.addSubview('#tabs-row', tabView);
@@ -90,6 +93,59 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
         $($(this).data('target-nav-btn')).addClass('active');
       } else {
         $($(this).data('target-nav-btn')).removeClass('active');
+      }
+    });
+  },
+  
+  createStory: function (event) {
+    event.preventDefault();
+    var params = $(event.target).closest('form').serializeJSON()['story'];
+    
+    $inputField = $('#input-story-title');
+    
+    if ($.trim(params['title']) === '') {
+      $inputField.closest('.form-group').addClass('has-error');
+      $inputField.attr('placeholder', 'insert story title here');
+      $inputField.focus();
+      return;
+    } else {
+      $inputField.closest('.form-group').removeClass('has-error');
+    };
+    
+    var icebox = this.model.tabs().find(function(tab) {
+      return tab.get('name') === 'icebox';
+    });
+    
+    var ord = (icebox.stories().length > 0) ?
+              _.max(icebox.stories().pluck('ord')) + 1 : 0;
+    
+    $('#input-story-title').val('');
+    
+    icebox.stories().create({
+      title: params['title'],
+      tab_id: icebox.id,
+      ord: ord
+    }, {
+      wait: true
+    });
+  },
+  
+  confirmDeleteProject: function (event) {
+    event.preventDefault();
+    
+    $('#projectDeletionModal').modal();
+  },
+  
+  deleteProject: function (event) {
+    event.preventDefault();
+    
+    $('#projectDeletionModal').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    
+    this.model.destroy({
+      success: function () {
+        Backbone.history.navigate('/', { trigger: true });
       }
     });
   }

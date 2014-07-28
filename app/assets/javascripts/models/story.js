@@ -1,9 +1,9 @@
 LiteTracker.Models.Story = Backbone.Model.extend({
-  urlRoot: function () {
-    return '/api/projects/' + this.project.get('id') + '/stories';
-  },
-  
-  initialize: function (options) {
-    this.project = options.project
+  validate: function (attributes, options) {
+    if (attributes['ord'] < 0) {
+      return 'ord cannot be less than 0';
+    } else if (attributes['title'] === '') {
+      return 'title cannot be blank';
+    }
   }
 });

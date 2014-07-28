@@ -1,8 +1,4 @@
-LiteTracker.Models.Tab = Backbone.Model.extend({
-  initialize: function (options) {
-    this.project = options.project;
-  },
-  
+LiteTracker.Models.Tab = Backbone.Model.extend({  
   parse: function (payload) {
     if (payload.stories) {
       this.stories().set(payload.stories, { parse: true });
@@ -12,9 +8,13 @@ LiteTracker.Models.Tab = Backbone.Model.extend({
     return payload;
   },
   
+  project: function () {
+    return this.collection.project;
+  },
+  
   stories: function () {
     this._stories = this._stories ||
-                    new LiteTracker.Collections.Stories([], { project: this.project });
+                    new LiteTracker.Collections.Stories([], { tab: this });
     return this._stories;
   }
 });

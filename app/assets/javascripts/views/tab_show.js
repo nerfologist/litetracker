@@ -11,9 +11,39 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
     }
   },
   
+  initialize: function () {
+    var view = this;
+    
+    this.listenTo(this.model, 'sync', this.render);
+    this.listenTo(this.model.stories(), 'add', this.addStory);
+    this.listenTo(this.model.stories(), 'remove', this.removeStory);
+    
+    this.model.stories().each(function (story) {
+      view.addStory(story);
+    });
+  },
+  
   render: function () {
     var renderedContent = this.template({ tab: this.model });
     this.$el.html(renderedContent);
+    
+    this.attachSubviews();
+    
     return this;
+  },
+  
+  addStory: function (story) {
+    var storyView = new LiteTracker.Views.StoryShow({ model: story });
+    this.addSubview('.stories-column', storyView);
+  },
+  
+  removeStory: function (story) {
+    var subview = _.find(
+      this.subviews('.stories-column'), function (subview) {
+        return subview.model === story;
+      }
+    );
+    
+    this.removeSubview('.stories-column', subview);
   }
 });
