@@ -1,9 +1,11 @@
-<div class='tab-header'>
-  <%= tab.escape('name') %>
-  <nav class='tab-controls'>
-    <a href='#' class='tab-icon tab-button'
-                data-target='#tab-<%= tab.escape('name') %>'>
-      <span class='glyphicon glyphicon-remove'>
-    </a>
-  </nav>
+<div class='tab'>
+  <div class='tab-header'>
+    <%= tab.escape('name') %>
+    <nav class='tab-controls'>
+      <a href='#' class='tab-icon tab-button'
+         data-target='#tab-column-<%= tab.escape('name') %>'>
+           <span class='glyphicon glyphicon-remove'>
+      </a>
+    </nav>
+  </div>
 </div>

@@ -25,18 +25,20 @@ body {
   top: 25%;
 }
 
+.hidden {
+  display: none;
+}
+
 div#tabs-container {
   height: 95vh;
 }
 
-div#tabs-row, div.tab {
+div.tab {
   height: 800px;
 }
 
 div.tab {
   border-radius: 8px;
-  border: 4px solid white;
-  display: none;
   -webkit-background-size: 50px 50px;
   background-color: #aeb6b9;
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
@@ -44,18 +46,12 @@ div.tab {
   box-shadow: 10px 10px 5px #ccc;
 }
 
-div.tab.visible {
-  display: block;
-};
-
 div.tab-header {
   background-color: #333;
   height: 30px;
   line-height: 30px;
   color: #fff;
   display: block;
-  margin-left: -15px;
-  margin-right: -15px;
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 6px 6px 0 0;

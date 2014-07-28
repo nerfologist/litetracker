@@ -3,10 +3,10 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   
   attributes: function () {
     return {
-      'class'               : 'tab col-xs-3 ' +
-                              (this.model.get('visible') ? 'visible' : ''),
-      'id'                  : 'tab-' + this.model.escape('name'),
-      'data-id'             : this.model.get('id'),
+      'class'               : 'col-xs-3 tab-column' +
+                              (this.model.get('visible') ? '' : ' hidden'),
+      'id'                  : 'tab-column-' + this.model.escape('name'),
+      'data-tab-id'         : this.model.get('id'),
       'data-target-nav-btn' : '#nav-visible-' + this.model.escape('name')
     }
   },

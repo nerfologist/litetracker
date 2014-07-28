@@ -40,7 +40,7 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
   
   setupSortables: function () {
     this.$('#tabs-row').sortable({
-      containment: 'parent',
+      axis: 'x',
       cursor: 'move',
       distance: 5
     });
@@ -48,45 +48,45 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
   
   persistTabOrder: function (event) {
     var that = this;
-    $tabs = $(event.target).find('.tab');
-    $tabs.each(function (idx) {
-      var tabModel = that.model.tabs().sort().get($(this).data('id'));
+    $tabColumns = $(event.target).find('.tab-column');
+    $tabColumns.each(function (idx) {
+      var tabModel = that.model.tabs().sort().get($(this).data('tab-id'));
       tabModel.set('ord', idx)
       tabModel.save();
     });
   },
   
   toggleTabVisible: function (event) {
+    event.preventDefault();
+    
     // works for: navbar buttons; tab 'x' buttons (event.target is a span there)
     var $anchor = $(event.target).closest('a');
     
-    var $targetTab = $($anchor.data('target'));
-    var tabModel = this.model.tabs().get($targetTab.data('id'));
-    
-    event.preventDefault();
+    var $targetTabColumn = $($anchor.data('target'));
+    var tabModel = this.model.tabs().get($targetTabColumn.data('tab-id'));
     
     $anchor.closest('li').toggleClass('active');
-    $targetTab.toggleClass('visible');
+    $targetTabColumn.toggleClass('hidden');
     
     this.updateVisibleTabsAndButtons();
 
     // update tab model with new visibility
-    tabModel.set('visible', $targetTab.hasClass('visible'))
+    tabModel.set('visible', ! $targetTabColumn.hasClass('hidden'))
     tabModel.save();
   },
   
   updateVisibleTabsAndButtons: function () {
     // resize visible tabs to cover grid space
-    var $visibleTabs = this.$('div.tab.visible');
+    var $visibleTabs = this.$('div.tab-column').not('.hidden');
     $visibleTabs.each(function (idx) {
       $(this).removeClass('col-xs-12 col-xs-6 col-xs-4 col-xs-3')
              .addClass('col-xs-' + (12 / $visibleTabs.length));
     });
     
     // update visibility buttons
-    var $allTabs = this.$('div.tab');
+    var $allTabs = this.$('div.tab-column');
     $allTabs.each(function (idx) {
-      if ($(this).hasClass('visible')) {
+      if (! $(this).hasClass('hidden')) {
         $($(this).data('target-nav-btn')).addClass('active');
       } else {
         $($(this).data('target-nav-btn')).removeClass('active');
