@@ -13,6 +13,8 @@ LiteTracker.Routers.AppRouter = Backbone.Router.extend({
       collection: LiteTracker.Collections.projects
     });
     
+    LiteTracker.Collections.projects.fetch();
+    
     this._swapView(view);
   },
   

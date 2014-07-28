@@ -20,4 +20,8 @@ class Tab < ActiveRecord::Base
   has_many :stories, dependent: :destroy
   
   default_scope { order :ord }
+  
+  after_save do
+    project.update_attribute(:updated_at, Time.now)
+  end
 end
