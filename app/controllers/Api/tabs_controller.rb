@@ -60,7 +60,7 @@ module Api
     private
 
     def tab_params
-      params.require(:tab).permit(:name)
+      params.require(:tab).permit(:name, :ord, :visible)
     end
   end
 end

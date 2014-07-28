@@ -7,6 +7,7 @@
 #  project_id :integer          not null
 #  created_at :datetime
 #  updated_at :datetime
+#  ord        :integer          not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

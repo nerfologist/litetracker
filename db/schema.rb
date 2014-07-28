@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724185503) do
+ActiveRecord::Schema.define(version: 20140725213730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,13 +46,16 @@ ActiveRecord::Schema.define(version: 20140724185503) do
     t.string   "state",      null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "ord",        null: false
   end
 
   create_table "tabs", force: true do |t|
-    t.string   "name",       null: false
-    t.integer  "project_id", null: false
+    t.string   "name",                      null: false
+    t.integer  "project_id",                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "ord",                       null: false
+    t.boolean  "visible",    default: true, null: false
   end
 
   add_index "tabs", ["project_id"], name: "index_tabs_on_project_id", using: :btree

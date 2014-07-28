@@ -17,10 +17,10 @@ module Api
     def create
       project = current_user.projects.new(project_params)
       project.tabs.new([
-        {name: 'icebox'},
-        {name: 'backlog'},
-        {name: 'current'},
-        {name: 'done'}
+        {name: 'current', ord: 1},
+        {name: 'backlog', ord: 2},
+        {name: 'icebox', ord: 3},
+        {name: 'done', ord: 4}
       ])
     
       if project.save

@@ -10,6 +10,7 @@
 #  state      :string(255)      not null
 #  created_at :datetime
 #  updated_at :datetime
+#  ord        :integer          not null
 #
 
 require 'test_helper'
