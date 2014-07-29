@@ -59,11 +59,12 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   
   persistStoryOrder: function (event) {
     event.stopPropagation();
+    
     var view = this;
     var $target = $(event.target);
     
     var tabId = $target.closest('.tab-column').data('tab-id');
-    var $storyEls = $(event.target).find('.story');
+    var $storyEls = $target.find('.story');
     
     $storyEls.each(function (idx) {
       var storyModel = view.model.stories().get($(this).data('story-id'));
