@@ -16,20 +16,20 @@ Current herokuapp website: http://litetracker.herokuapp.com/
   - story model & controller ✓
   - sane API, well defined routes ✓
 2. Backbone
-  - project model & view structure (paper template first)
-  - projects collection. Top-level projects collection.
-  - tab model & view structure (paper template first)
-  - tabs collection (project has one tabs collection)
-  - story model & view structure (paper template first)
-  - stories collection. Top-level stories collection. Tab level stories collection.
+  - project model & view structure (paper template first) ✓
+  - projects collection. Top-level projects collection. ✓
+  - tab model & view structure (paper template first) ✓
+  - tabs collection (project has one tabs collection) ✓
+  - story model & view structure (paper template first) ✓
+  - stories collection. Top-level stories collection. Tab level stories ✓ collection.
 3. JavaScript
-  - routes
-  - views implementation
-  - views event handling (listening to models and collections)
-  - views event handling (listening to user interface elements)
+  - routes ✓
+  - views implementation ✓
+  - views event handling (listening to models and collections) ✓
+  - views event handling (listening to user interface elements) ✓
   - drag & drop stories between tabs
 4. Polish
-  - CSS and styling (bootstrap)
+  - CSS and styling (bootstrap) ✓
   - add a logo
   - add a captivating homepage
   - add demo user & seed content
