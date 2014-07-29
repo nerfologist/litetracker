@@ -2,13 +2,14 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
   template: JST['project/show'],
   
   attributes: {
-    class: 'project'
+    'class': 'project'
   },
   
   initialize: function (options) {
+    "use strict";
     var view = this;
     this.listenTo(this.model, 'sync', this.render);
-    this.listenTo(this.model.tabs(), 'add', this.addTab)
+    this.listenTo(this.model.tabs(), 'add', this.addTab);
     
     this.model.tabs().each(function (tab) {
       view.addTab(tab);
@@ -24,11 +25,13 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
   },
 
   addTab: function (tab) {
+    "use strict";
     var tabView = new LiteTracker.Views.TabShow({ model: tab });
     this.addSubview('#tabs-row', tabView);
   },
   
   render: function () {
+    "use strict";
     var renderedContent = this.template({ project: this.model });
     this.$el.html(renderedContent);
     
@@ -42,6 +45,7 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
   },
   
   setupSortables: function () {
+    "use strict";
     this.$('#tabs-row').sortable({
       axis: 'x',
       cursor: 'move',
@@ -56,16 +60,18 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
   },
   
   persistTabOrder: function (event) {
+    "use strict";
     var that = this;
-    $tabColumns = $(event.target).find('.tab-column');
+    var $tabColumns = $(event.target).find('.tab-column');
     $tabColumns.each(function (idx) {
       var tabModel = that.model.tabs().sort().get($(this).data('tab-id'));
-      tabModel.set('ord', idx)
+      tabModel.set('ord', idx);
       tabModel.save();
     });
   },
   
   toggleTabVisible: function (event) {
+    "use strict";
     event.preventDefault();
     
     // works for: navbar buttons; tab 'x' buttons (event.target is a span there)
@@ -80,11 +86,12 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
     this.updateVisibleTabsAndButtons();
 
     // update tab model with new visibility
-    tabModel.set('visible', ! $targetTabColumn.hasClass('hidden'))
+    tabModel.set('visible', ! $targetTabColumn.hasClass('hidden'));
     tabModel.save();
   },
   
   updateVisibleTabsAndButtons: function () {
+    "use strict";
     // resize visible tabs to cover grid space
     var $visibleTabs = this.$('div.tab-column').not('.hidden');
     $visibleTabs.each(function (idx) {
@@ -104,19 +111,20 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
   },
   
   createStory: function (event) {
+    "use strict";
     event.preventDefault();
-    var params = $(event.target).closest('form').serializeJSON()['story'];
+    var params = $(event.target).closest('form').serializeJSON().story;
     
-    $inputField = $('#input-story-title');
+    var $inputField = $('#input-story-title');
     
-    if ($.trim(params['title']) === '') {
+    if ($.trim(params.title) === '') {
       $inputField.closest('.form-group').addClass('has-error');
       $inputField.attr('placeholder', 'insert story title here');
       $inputField.focus();
       return;
-    } else {
-      $inputField.closest('.form-group').removeClass('has-error');
-    };
+    }
+    
+    $inputField.closest('.form-group').removeClass('has-error');
     
     var icebox = this.model.tabs().find(function(tab) {
       return tab.get('name') === 'icebox';
@@ -128,7 +136,7 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
     $('#input-story-title').val('');
     
     icebox.stories().create({
-      title: params['title'],
+      title: params.title,
       tab_id: icebox.id,
       ord: ord
     }, {
@@ -137,12 +145,14 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
   },
   
   confirmDeleteProject: function (event) {
+    "use strict";
     event.preventDefault();
     
     $('#projectDeletionModal').modal();
   },
   
   deleteProject: function (event) {
+    "use strict";
     event.preventDefault();
     
     $('#projectDeletionModal').modal('hide');

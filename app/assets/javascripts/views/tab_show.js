@@ -2,22 +2,24 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   template: JST['tab/show'],
   
   attributes: function () {
+    "use strict";
     return {
       'class'               : 'col-xs-3 tab-column' +
                               (this.model.get('visible') ? '' : ' hidden'),
       'id'                  : 'tab-column-' + this.model.escape('name'),
       'data-tab-id'         : this.model.get('id'),
       'data-target-nav-btn' : '#nav-visible-' + this.model.escape('name')
-    }
+    };
   },
   
   events: {
     'sortupdate div.stories-column'   : 'persistStoryOrder',
     'sortremove div.stories-column'   : 'dragStory',
-    'sortreceive div.stories-column'  : 'dropStory',
+    'sortreceive div.stories-column'  : 'dropStory'
   },
   
   initialize: function () {
+    "use strict";
     var view = this;
     
     this.listenTo(this.model, 'sync', this.render);
@@ -30,6 +32,7 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   },
   
   render: function () {
+    "use strict";
     var renderedContent = this.template({ tab: this.model });
     this.$el.html(renderedContent);
     
@@ -43,11 +46,13 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   },
   
   addStory: function (story) {
+    "use strict";
     var storyView = new LiteTracker.Views.StoryShow({ model: story });
     this.addSubview('.stories-column', storyView);
   },
   
   removeStory: function (story) {
+    "use strict";
     var subview = _.find(
       this.subviews('.stories-column'), function (subview) {
         return subview.model === story;
@@ -58,6 +63,7 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   },
   
   persistStoryOrder: function (event) {
+    "use strict";
     event.stopPropagation();
     
     var view = this;
@@ -73,6 +79,7 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   },
   
   dragStory: function (event, ui) {
+    "use strict";
     event.stopPropagation();
     
     var story = this.model.stories().get($(ui.item).data('story-id'));
@@ -81,9 +88,11 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   },
   
   dropStory: function (event, ui) {
+    "use strict";
     event.stopPropagation();
     
-    var story = LiteTracker.Collections.tempStories.get($(ui.item).data('story-id'));
+    var story = LiteTracker.Collections.
+                  tempStories.get($(ui.item).data('story-id'));
     LiteTracker.Collections.tempStories.remove(story);
     this.model.stories().add(story);
   }

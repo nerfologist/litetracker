@@ -1,5 +1,6 @@
 LiteTracker.Routers.AppRouter = Backbone.Router.extend({
   initialize: function (options) {
+    "use strict";
     this.$rootEl = options.$rootEl;
   },
   
@@ -9,6 +10,7 @@ LiteTracker.Routers.AppRouter = Backbone.Router.extend({
   },
   
   projectsIndex: function () {
+    "use strict";
     var view = new LiteTracker.Views.ProjectsIndex({
       collection: LiteTracker.Collections.projects
     });
@@ -19,6 +21,7 @@ LiteTracker.Routers.AppRouter = Backbone.Router.extend({
   },
   
   showProject: function (id) {
+    "use strict";
     var project = LiteTracker.Collections.projects.getOrFetch(id);
     // refresh project anyway
     project.fetch();
@@ -31,9 +34,12 @@ LiteTracker.Routers.AppRouter = Backbone.Router.extend({
   },
   
   _swapView: function (newView) {
-    this.currentView && this.currentView.remove();
+    "use strict";
+    if (this.currentView) {
+      this.currentView.remove();
+    }
     
-    this.$rootEl.html(newView.render().$el)
+    this.$rootEl.html(newView.render().$el);
     this.currentView = newView;
   }
 });

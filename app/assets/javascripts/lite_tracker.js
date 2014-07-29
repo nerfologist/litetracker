@@ -4,6 +4,7 @@ window.LiteTracker = {
   Views: {},
   Routers: {},
   initialize: function() {
+    "use strict";
     new LiteTracker.Routers.AppRouter({
       $rootEl: $('div#main')
     });

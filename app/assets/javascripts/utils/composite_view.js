@@ -1,11 +1,13 @@
 Backbone.CompositeView = Backbone.View.extend({
   addSubview: function (selector, subview, prepend) {
+    "use strict";
     this.subviews(selector).push(subview);
     // Try to attach the subview. Render it as a convenience.
     this.attachSubview(selector, subview.render(), prepend);
   },
 
   attachSubview: function (selector, subview, prepend) {
+    "use strict";
     if (prepend) {
       this.$(selector).prepend(subview.$el);
     } else {
@@ -19,6 +21,7 @@ Backbone.CompositeView = Backbone.View.extend({
   },
 
   attachSubviews: function () {
+    "use strict";
     // I decided I didn't want a function that renders ALL the
     // subviews together. Instead, I think:
     //
@@ -40,6 +43,7 @@ Backbone.CompositeView = Backbone.View.extend({
   },
 
   remove: function () {
+    "use strict";
     Backbone.View.prototype.remove.call(this);
     _(this.subviews()).each(function (subviews) {
       _(subviews).each(function (subview) {
@@ -49,6 +53,7 @@ Backbone.CompositeView = Backbone.View.extend({
   },
 
   removeSubview: function (selector, subview) {
+    "use strict";
     subview.remove();
 
     var subviews = this.subviews(selector);
@@ -56,6 +61,7 @@ Backbone.CompositeView = Backbone.View.extend({
   },
 
   subviews: function (selector) {
+    "use strict";
     // Map of selectors to subviews that live inside that selector.
     // Optionally pass a selector and I'll initialize/return an array
     // of subviews for the sel.
@@ -63,9 +69,9 @@ Backbone.CompositeView = Backbone.View.extend({
 
     if (!selector) {
       return this._subviews;
-    } else {
-      this._subviews[selector] = this._subviews[selector] || [];
-      return this._subviews[selector];
     }
+    
+    this._subviews[selector] = this._subviews[selector] || [];
+    return this._subviews[selector];
   }
 });
