@@ -12,7 +12,9 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   },
   
   events: {
-    'sortupdate div.stories-column' : 'persistStoryOrder',
+    'sortupdate div.stories-column'   : 'persistStoryOrder',
+    'sortremove div.stories-column'   : 'dragStory',
+    'sortreceive div.stories-column'  : 'dropStory',
   },
   
   initialize: function () {
@@ -33,7 +35,9 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
     
     this.attachSubviews();
     
-    this.$('div.stories-column').sortable();
+    this.$('div.stories-column').sortable({
+      connectWith: 'div.stories-column'
+    });
 
     return this;
   },
@@ -51,5 +55,35 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
     );
     
     this.removeSubview('.stories-column', subview);
+  },
+  
+  persistStoryOrder: function (event) {
+    event.stopPropagation();
+    var view = this;
+    var $target = $(event.target);
+    
+    var tabId = $target.closest('.tab-column').data('tab-id');
+    var $storyEls = $(event.target).find('.story');
+    
+    $storyEls.each(function (idx) {
+      var storyModel = view.model.stories().get($(this).data('story-id'));
+      storyModel.save({ ord: idx, tab_id: tabId });
+    });
+  },
+  
+  dragStory: function (event, ui) {
+    event.stopPropagation();
+    
+    var story = this.model.stories().get($(ui.item).data('story-id'));
+    this.model.stories().remove(story);
+    LiteTracker.Collections.tempStories.add(story);
+  },
+  
+  dropStory: function (event, ui) {
+    event.stopPropagation();
+    
+    var story = LiteTracker.Collections.tempStories.get($(ui.item).data('story-id'));
+    LiteTracker.Collections.tempStories.remove(story);
+    this.model.stories().add(story);
   }
 });

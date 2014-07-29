@@ -11,3 +11,7 @@ LiteTracker.Collections.Stories = Backbone.Collection.extend({
   
   comparator: 'ord'
 });
+
+LiteTracker.Collections.tempStories = new LiteTracker.Collections.Stories([], {
+  tab: null
+});
