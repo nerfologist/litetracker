@@ -47,6 +47,12 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
       cursor: 'move',
       distance: 5
     });
+    
+    // tab view's sortable() won't work if we don't fake a model update on tabs
+    // to have them re-render. Earlier they were not in the DOM. Don't remove.
+    this.model.tabs().each(function (tab) {
+      tab.trigger('sync');
+    });
   },
   
   persistTabOrder: function (event) {

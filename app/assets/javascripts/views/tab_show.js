@@ -11,6 +11,10 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
     }
   },
   
+  events: {
+    'sortupdate div.stories-column' : 'persistStoryOrder',
+  },
+  
   initialize: function () {
     var view = this;
     
@@ -29,6 +33,8 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
     
     this.attachSubviews();
     
+    this.$('div.stories-column').sortable();
+
     return this;
   },
   
