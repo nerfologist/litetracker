@@ -15,7 +15,7 @@
 
 class Story < ActiveRecord::Base
   validates :tab, :title, :ord, presence: true
-  validates :type, inclusion: { in: %w(feature bug chore release), allow_nil: true }
+  validates :kind, inclusion: { in: %w(feature bug chore release), allow_nil: true }
   validates :points,
               numericality:
                 { only_integer: true,
@@ -31,6 +31,12 @@ class Story < ActiveRecord::Base
   has_one :project, through: :tab, source: :project
   
   default_scope { order :ord }
+  
+  after_save do
+    project.update_attribute(:updated_at, Time.now)
+  end
+  
+  private
   
   def ensure_valid_state
     self.state ||= 'unstarted'

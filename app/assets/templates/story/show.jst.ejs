@@ -1,18 +1,113 @@
 <div class='story-controls'>
   <div class='story-controls-left'>
     <a href='#' class='expand'>
-      <span class='glyphicon glyphicon-chevron-right'>
+      <span class='glyphicon <%= story.get('maximized') ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right' %>'>
       </a>
-  </div>
-  <div class='story-title'>
-    <%= story.escape('title') %>
-  </div>
-  <div class='story-controls-right'>
-    <a href='#' class='trash'>
-      <span class='glyphicon glyphicon-trash'>
-    </a>
+      <a href='#' class='story-icon'>
+        <% var kind = story.get('kind') %>
+        <% if (kind === 'feature') { %>
+          <span class='glyphicon glyphicon-star'>
+        <% } else if (kind === 'bug') { %>
+          <span class='glyphicon glyphicon-screenshot'>
+        <% } else if (kind === 'chore') { %>
+          <span class='glyphicon glyphicon-list-alt'>
+        <% } else if (kind === 'release') { %>
+          <span class='glyphicon glyphicon-flag'>
+        <% } %>
+      </a>
+    </div>
+    <div class='story-title'>
+      <%= story.escape('title') %>
+    </div>
+    <div class='story-controls-right'>
+      <a href='#' class='trash'>
+        <span class='glyphicon glyphicon-trash'>
+        </a>
+      </div>
     </div>
   </div>
 </div>
 <div class='story-details'>
+  <div class='container-fluid'>
+    
+    <form class="form-horizontal story-attributes" role="form">
+      <div class='form-group form-group-sm'>
+        <label class='col-xs-2 control-label' for='story_type'>Title</label>
+        <div class='col-xs-10'>
+          <input type='text' name='story[title]'
+                 class='form-control input-sm'
+                 value='<%= story.escape('title') %>'>
+        </div>
+      </div>
+      
+      <div class='form-group form-group-sm'>
+        <label class='col-xs-2 control-label' for='story_type'>Points</label>
+        <div class='col-xs-10'>
+          <label class="radio-inline">
+            <input type="radio" name='story[points]' value="1"
+            <%= (story.get('points') === 1) ? 'checked' : ''%>> 1
+          </label>
+          
+          <label class="radio-inline">
+            <input type="radio" name='story[points]' value="2"
+            <%= (story.get('points') === 2) ? 'checked' : ''%>> 2
+          </label>
+          
+          <label class="radio-inline">
+            <input type="radio" name='story[points]' value="3"
+            <%= (story.get('points') === 3) ? 'checked' : ''%>> 3
+          </label>
+          
+          <label class="radio-inline">
+            <input type="radio" name='story[points]' value="4"
+            <%= (story.get('points') === 4) ? 'checked' : ''%>> 4
+          </label>
+        </div>
+      </div>
+      
+      <div class='form-group form-group-sm'>
+        <label class='col-xs-2 control-label' for='story_state'>Type</label>
+        <div class='col-xs-10'>
+          <select name='story[kind]' id='story_type' class='form-control input-sm'>
+        <% _.each(['feature', 'bug', 'chore', 'release'], function (kind) { %>
+        <option <%= story.get('kind') === kind ? 'selected' : '' %>><%= kind %></option>
+        <% }); %>
+          </select>
+        </div>
+      </div>
+      
+      <div class='form-group form-group-sm'>
+        <label class='col-xs-2 control-label' for='story_state'>State</label>
+        <div class='col-xs-4 status-col'>
+          <input type='text' disabled='disabled' class='form-control input-sm'
+                 value='<%= story.escape('state') %>'>
+        </div>
+        <div class='col-xs-6'>
+            <button class='btn btn-primary btn-xs btn-change-story-state'
+            <% if (!story.get('points')) { %>
+              disabled='disabled'
+            <% } %>
+            >
+              <% if (story.get('state') === 'unstarted')  { %>
+                  Start
+              <% } else if (story.get('state') === 'started') { %>
+                  Finish
+              <% } else if (story.get('state') === 'finished') { %>
+                  Accept
+              <% } else if (story.get('state') === 'rejected') { %>
+                  Restart
+              <% } else if (story.get('state') === 'accepted') { %>
+                  Reopen
+              <% } %>
+            </button>
+            <% if (story.get('state') === 'finished') { %>
+              <button class='btn btn-danger btn-xs btn-reject-story'>
+                Reject
+              </button>
+            <% } %>
+        </div>
+      </div>
+    </form>
+    
+  </div>
 </div>

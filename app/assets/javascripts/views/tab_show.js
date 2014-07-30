@@ -25,6 +25,7 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.stories(), 'add', this.addStory);
     this.listenTo(this.model.stories(), 'remove', this.removeStory);
+    this.listenTo(this.model.stories(), 'sync', this.refreshSortables);
     
     this.model.stories().each(function (story) {
       view.addStory(story);
@@ -95,5 +96,9 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
                   tempStories.get($(ui.item).data('story-id'));
     LiteTracker.Collections.tempStories.remove(story);
     this.model.stories().add(story);
+  },
+  
+  refreshSortables: function (event) {
+    this.$('.stories-column').sortable("refreshPositions");
   }
 });

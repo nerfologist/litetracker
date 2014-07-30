@@ -81,11 +81,20 @@ div.story {
   margin-top: 2px;
   box-shadow: 5px 5px 2px #999;
   /* background */
+  background-color: #f3f3d1;
   -webkit-background-size: 50px 50px;
-  background-color: #e4eff7;
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
   background-size: 50px 50px;
 }
+
+div.story.unstarted {
+  background-color: #e4eff7;
+}
+
+div.story.accepted {
+  background-color: #daebcf;
+}
+
 
 div.story-controls {
   width: 100%;
@@ -121,15 +130,66 @@ div.story-controls-right {
 
 div.story-details {
   clear: both;
-  height: 100px;
-  border: 1px solid black;
+  border: 1px solid grey;
+  background-color: #ddd;
+  padding-top: 5px;
+  padding-bottom: 5px;
   margin-bottom: 5px;
+  border-radius: 4px;
+  display: none;
 }
 
-div.story.preview > div.story-details {
-  display: none;
+div.story.maximized > div.story-details {
+  display: block;
 }
 
 div.stories-column {
   min-height: 200px;
+}
+
+.story-attributes label.control-label {
+  font-size: 12px;
+  padding-top: 4px;
+}
+
+.story-attributes input,
+.story-attributes select {
+  height: 25px;
+}
+
+.story-attributes input[type='radio'] {
+  height: 15px;
+}
+
+.story-attributes label.radio-inline {
+  padding-top: 0px;
+}
+
+.story-attributes .form-group {
+  margin-bottom: 5px;
+}
+
+.status-col {
+  padding-right: 5px;
+}
+
+div.story-controls span.glyphicon.glyphicon-star {
+  color: #FFB900;
+}
+
+div.story-controls span.glyphicon.glyphicon-list-alt {
+  color: black;
+}
+
+div.story-controls span.glyphicon.glyphicon-screenshot {
+  color: #c41414;
+}
+
+div.story-controls span.glyphicon.glyphicon-flag {
+  color: rgb(60, 182, 23);
+}
+
+div.ui-sortable-helper {
+  transform: rotate(1deg);
+  box-shadow: 10px 10px 5px #777;
 }
