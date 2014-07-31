@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by_credentials(params[:user])
    if user
      sign_in!(user)
-     redirect_to root_url
+     redirect_to go_url
    else
      flash[:errors] = ['invalid credentials']
      redirect_to new_session_url
@@ -16,6 +16,12 @@ class SessionsController < ApplicationController
   
   def destroy
     sign_out!
-    redirect_to new_session_url
+    redirect_to root_url
+  end
+  
+  def demo
+    user = User.find_by(email: 'demo@users.com')
+    sign_in!(user)
+    redirect_to go_url
   end
 end

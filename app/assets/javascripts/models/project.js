@@ -53,6 +53,7 @@ LiteTracker.Models.Project = Backbone.Model.extend({
     story.save({ tab_id: newTab.id, ord: maxOrd + 1 }, {
       success: function () {
         "use strict";
+
         story.collection.remove(story);
         newTab.stories().add(story);
         project.populateCurrent();
@@ -77,8 +78,6 @@ LiteTracker.Models.Project = Backbone.Model.extend({
       break;
     case 'accepted':
       this.moveToTab(story, this.done());
-      // we could have available points in the current tab now
-      this.populateCurrent();
       break;
     default:
       story.save();
@@ -93,9 +92,11 @@ LiteTracker.Models.Project = Backbone.Model.extend({
   // see if there are started stories in the backlog and bring them to current
   populateCurrent: function () {
     var project = this;
+    var movedPoints = 0;
     
     this.backlog().stories().sort().each(function (story) {
-      if (project.availablePoints() > story.get('points')) {
+      if (project.availablePoints() - movedPoints >= story.get('points')) {
+        movedPoints += story.get('points');
         project.moveToTab(story, project.current());
       }
     });

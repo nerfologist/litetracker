@@ -1,0 +1,38 @@
+<div class='container'>
+  <div id='main-logo-div'>
+    <%= image_tag('logo_black.png') %>
+  </div>
+  <div class='row' id='start-page-panel'>
+    <div class='col-xs-5 col-xs-offset-1'>
+      <div class='well' id='start-page-well-left'>
+
+        <h4>...a <a href='http://www.pivotaltracker.com/'><span class='external-link'>pivotal tracker</span></a> clone</h4>
+        <div class='spacer'>&nbsp;</div>
+        <ul>
+          <li><span class='glyphicon glyphicon-chevron-right'></span> create a project</li>
+          <li><span class='glyphicon glyphicon-chevron-right'></span> populate your tabs with stories</li>
+          <li><span class='glyphicon glyphicon-chevron-right'></span> stories can be:
+            <ul>
+              <li><span class='glyphicon glyphicon-star'></span> features</li>
+              <li><span class='glyphicon glyphicon-screenshot'></span> bugs</li>
+              <li><span class='glyphicon glyphicon-list-alt'></span> chores</li>
+              <li><span class='glyphicon glyphicon-flag'></span>releases</li>
+            </ul>
+          </li>
+          <li><span class='glyphicon glyphicon-chevron-right'></span> track your progress!</li>
+        </ul>
+      </div>
+    </div>
+    <div class='col-xs-5' >
+      <div class='well' id='start-page-well-right'>
+          <p><span class='glyphicon glyphicon-ok'></span>&nbsp;&nbsp;already have an account?</p>
+          <a href='/session/new' class='btn btn-primary'>Log In</a>
+          <p><span class='glyphicon glyphicon-user'></span>&nbsp;&nbsp;sign up and start tracking</p>
+          <a href='/users/new' class='btn btn-info'>Register</a>
+          <p><span class='glyphicon glyphicon-gift'></span>&nbsp;&nbsp;try LiteTracker for free</p>
+          <a href='/sessions/demo' class='btn btn-warning'>Demo</a>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

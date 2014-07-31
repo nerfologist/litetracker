@@ -30,12 +30,70 @@ body {
   display: none;
 }
 
+.external-link {
+  color: red;
+  background-color: #ccc;
+  font-variant: small-caps;
+}
+
+div.spacer {
+  min-height: 20px;
+}
+
+div#main-logo-div {
+  width: 400px;
+  height: 266px;
+  margin: 0 auto;
+}
+
+div#start-page-panel {
+  margin-top: 10px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+div#start-page-panel h1, div#start-page-panel h2,
+div#start-page-panel h3, div#start-page-panel h4 {
+  text-align: center;
+}
+
+div#start-page-panel div.well {
+  height: 310px;
+}
+
+div#start-page-panel ul {
+  list-style-type: none;
+  line-height: 20px;
+}
+
+div.well {
+  background-color: #f2ead0;
+  box-shadow: 5px 5px 2px #ccc;
+}
+
+div#start-page-well-right {
+  padding-left: 65px;
+  background-color: #a9d9cb;
+}
+
+div#start-page-well-right p:nth-child(1) {
+  margin-top: 15px;
+}
+
+div#start-page-well-right p {
+  margin-top: 25px;
+}
+
 div#tabs-container {
   height: 95vh;
 }
 
+a.logo-link {
+  padding-top: 0px;
+  margin-right: 20px;
+}
+
 div.tab {
-  height: 800px;
+  min-height: 800px;
   border-radius: 8px;
   -webkit-background-size: 50px 50px;
   background-color: #aeb6b9;
@@ -117,7 +175,7 @@ div.story-controls-left {
 div.story-title {
   float: left;
   line-height: 30px;
-  max-width: 240px;
+  max-width: 220px;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -171,19 +229,19 @@ div.story.maximized > div.story-details {
   padding-right: 5px;
 }
 
-div.story-controls span.glyphicon.glyphicon-star {
+span.glyphicon.glyphicon-star {
   color: #FFB900;
 }
 
-div.story-controls span.glyphicon.glyphicon-list-alt {
+span.glyphicon.glyphicon-list-alt {
   color: black;
 }
 
-div.story-controls span.glyphicon.glyphicon-screenshot {
+span.glyphicon.glyphicon-screenshot {
   color: #c41414;
 }
 
-div.story-controls span.glyphicon.glyphicon-flag {
+span.glyphicon.glyphicon-flag {
   color: rgb(60, 182, 23);
 }
 
