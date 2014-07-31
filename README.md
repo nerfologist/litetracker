@@ -30,9 +30,9 @@ Current herokuapp website: http://litetracker.herokuapp.com/
   - drag & drop stories between tabs
 4. Polish
   - CSS and styling (bootstrap) ✓
-  - add a logo
-  - add a captivating homepage
-  - add demo user & seed content
+  - add a logo ✓
+  - add a captivating homepage ✓
+  - add demo user & seed content ✓
   - DRYing out code
   - fixing quirks
 5. Extra
