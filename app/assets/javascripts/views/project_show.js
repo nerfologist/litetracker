@@ -10,6 +10,8 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
     var view = this;
     this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.tabs(), 'add', this.addTab);
+    this.listenTo(LiteTracker.Models.dispatcher,
+                  'renderComplete', this.onRender);
     
     this.model.tabs().each(function (tab) {
       view.addTab(tab);
@@ -21,7 +23,10 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
     'sortupdate div#tabs-row'          : 'persistTabOrder',
     'click .btn-create-story'          : 'createStory',
     'click li#nav-destroy-project'     : 'confirmDeleteProject',
-    'click button#btn-delete-project'  : 'deleteProject'
+    'click li#nav-change-capacity'     : 'showChangeCapacityModal',
+    'click button#btn-delete-project'  : 'deleteProject',
+    'slide #capacitySlider'            : 'handleCapacitySlide',
+    'click button#btn-set-capacity'    : 'changeCapacity'
   },
 
   addTab: function (tab) {
@@ -38,10 +43,16 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
     this.attachSubviews();
     this.updateVisibleTabsAndButtons();
     
-    // needs to be called after all DOM elements are in place
-    this.setupSortables();
-    
+    // signal views that rendering is done so they can setup
+    // sortables, datepickers, etc
+    LiteTracker.Models.dispatcher.trigger("renderComplete");
     return this;
+  },
+  
+  onRender: function () {
+    "use strict";
+    this.setupSortables();
+    this.setupSlider();
   },
   
   setupSortables: function () {
@@ -51,12 +62,11 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
       cursor: 'move',
       distance: 5
     });
-    
-    // tab view's sortable() won't work if we don't fake a model update on tabs
-    // to have them re-render. Earlier they were not in the DOM. Don't remove.
-    this.model.tabs().each(function (tab) {
-      tab.trigger('sync');
-    });
+  },
+  
+  setupSlider: function () {
+    $('.slider').slider();
+    $('.slider.slider-horizontal').css('width', '90%');
   },
   
   persistTabOrder: function (event) {
@@ -68,6 +78,9 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
       tabModel.set('ord', idx);
       tabModel.save();
     });
+    
+    // used by stries to refresh datepicker()s
+    LiteTracker.Models.dispatcher.trigger('tabSortComplete')
   },
   
   toggleTabVisible: function (event) {
@@ -164,5 +177,27 @@ LiteTracker.Views.ProjectShow = Backbone.CompositeView.extend({
         Backbone.history.navigate('/', { trigger: true });
       }
     });
+  },
+  
+  showChangeCapacityModal: function (event) {
+    "use strict";
+    event.preventDefault();
+    
+    $('#changeCapacityModal').modal();
+  },
+  
+  handleCapacitySlide: function (event) {
+    this.$('#capacity-value').text(event.value);
+  },
+  
+  changeCapacity: function (event) {
+    var newCapacity = $('#capacitySlider').val();
+    this.model.set('capacity', newCapacity);
+    
+    $('#changeCapacityModal').modal('hide');
+    $('body').removeClass('modal-open');
+    $('.modal-backdrop').remove();
+    
+    this.model.save();
   }
 });

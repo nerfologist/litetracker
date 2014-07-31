@@ -15,7 +15,8 @@
  */
 
 @import "bootstrap";
-@import "font-awesome";
+@import "datepicker3";
+@import "slider";
 
 body {
   margin-top: 50px;
@@ -70,6 +71,7 @@ p.project-title {
 div.stories-column {
   padding-left: 4px;
   padding-right: 4px;
+  min-height: 100%;
 }
 
 div.story {
@@ -143,10 +145,6 @@ div.story.maximized > div.story-details {
   display: block;
 }
 
-div.stories-column {
-  min-height: 200px;
-}
-
 .story-attributes label.control-label {
   font-size: 12px;
   padding-top: 4px;
@@ -192,4 +190,10 @@ div.story-controls span.glyphicon.glyphicon-flag {
 div.ui-sortable-helper {
   transform: rotate(1deg);
   box-shadow: 10px 10px 5px #777;
+}
+
+span#capacity-value {
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
 }

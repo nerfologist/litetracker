@@ -39,7 +39,7 @@ LiteTracker.Routers.AppRouter = Backbone.Router.extend({
       this.currentView.remove();
     }
     
-    this.$rootEl.html(newView.render().$el);
+    this.$rootEl.html(newView.render().$el);    
     this.currentView = newView;
   }
 });

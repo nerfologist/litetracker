@@ -15,18 +15,22 @@ LiteTracker.Models.Story = Backbone.Model.extend({
   },
   
   tab: function () {
+    "use strict";
     return this.collection.tab;
   },
   
   project: function () {
+    "use strict";
     return this.tab().project();
   },
   
   start: function () {
+    "use strict";
     this.project().requestStateChange(this, 'started');
   },
   
   accept: function () {
+    "use strict";
     this.project().requestStateChange(this, 'accepted');
   }
 });

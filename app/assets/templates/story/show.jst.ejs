@@ -30,13 +30,22 @@
 <div class='story-details'>
   <div class='container-fluid'>
     
-    <form class="form-horizontal story-attributes" role="form">
+    <form class="form-horizontal story-attributes" role="form"
+          id='std-attributes'>
       <div class='form-group form-group-sm'>
         <label class='col-xs-2 control-label' for='story_type'>Title</label>
         <div class='col-xs-10'>
           <input type='text' name='story[title]'
                  class='form-control input-sm'
                  value='<%= story.escape('title') %>'>
+        </div>
+      </div>
+      
+      <div class='form-group form-group-sm'>
+        <label class='col-xs-2 control-label' for='story_description'>Note</label>
+        <div class='col-xs-10'>
+          <textarea name='story[description]'
+                    class='form-control input-sm'><%= story.escape('description') %></textarea>
         </div>
       </div>
       
@@ -83,28 +92,40 @@
                  value='<%= story.escape('state') %>'>
         </div>
         <div class='col-xs-6'>
-            <button class='btn btn-primary btn-xs btn-change-story-state'
-            <% if (!story.get('points')) { %>
-              disabled='disabled'
+          <button class='btn btn-primary btn-xs btn-change-story-state'
+          <% if (!story.get('points')) { %>
+            disabled='disabled'
+          <% } %>
+          >
+            <% if (story.get('state') === 'unstarted')  { %>
+                Start
+            <% } else if (story.get('state') === 'started') { %>
+                Finish
+            <% } else if (story.get('state') === 'finished') { %>
+                Accept
+            <% } else if (story.get('state') === 'rejected') { %>
+                Restart
+            <% } else if (story.get('state') === 'accepted') { %>
+                Reopen
             <% } %>
-            >
-              <% if (story.get('state') === 'unstarted')  { %>
-                  Start
-              <% } else if (story.get('state') === 'started') { %>
-                  Finish
-              <% } else if (story.get('state') === 'finished') { %>
-                  Accept
-              <% } else if (story.get('state') === 'rejected') { %>
-                  Restart
-              <% } else if (story.get('state') === 'accepted') { %>
-                  Reopen
-              <% } %>
+          </button>
+          <% if (story.get('state') === 'finished') { %>
+            <button class='btn btn-danger btn-xs btn-reject-story'>
+              Reject
             </button>
-            <% if (story.get('state') === 'finished') { %>
-              <button class='btn btn-danger btn-xs btn-reject-story'>
-                Reject
-              </button>
-            <% } %>
+          <% } %>
+        </div>
+      </div>
+    </form>
+    
+    <form role='form' id='ext-attributes' class='form-horizontal story-attributes'>
+      <div class='form-group form-group-sm'>
+        <label class='col-xs-2 control-label' for='story_type'>Due</label>
+        <div class='col-xs-10'>
+          <input type="text" name="story[deadline]"
+              <% var deadline = story.escape('deadline') %>
+              value='<%= deadline ? new Date(story.escape('deadline')).toNaiveString() : '' %>'
+              class='form-control input-sm'>
         </div>
       </div>
     </form>

@@ -1,0 +1,1 @@
+LiteTracker.Models.dispatcher = _.extend({}, Backbone.Events);

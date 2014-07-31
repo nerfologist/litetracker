@@ -66,7 +66,8 @@ module Api
 
     private
     def story_params
-      params.require(:story).permit(:tab_id, :title, :ord, :kind, :points, :state, :maximized)
+      params.require(:story).permit(:tab_id, :title, :ord, :kind, :points,
+                                    :state, :maximized, :deadline, :description)
     end
   end
 end

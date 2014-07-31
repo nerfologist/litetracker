@@ -25,3 +25,5 @@
 //= require_tree ./routers
 //= require_tree .
 //= require bootstrap
+//= require bootstrap-datepicker
+//= require bootstrap-slider

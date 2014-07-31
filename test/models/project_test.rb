@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  title      :string(255)      not null
 #  owner_id   :integer          not null
-#  velocity   :integer
+#  velocity   :integer          default(5)
 #  created_at :datetime
 #  updated_at :datetime
 #

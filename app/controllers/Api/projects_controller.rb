@@ -53,7 +53,7 @@ module Api
     private
 
     def project_params
-      params.require(:project).permit(:title, :velocity)
+      params.require(:project).permit(:title, :capacity)
     end
   end
 end

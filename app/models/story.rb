@@ -5,12 +5,14 @@
 #  id         :integer          not null, primary key
 #  tab_id     :integer
 #  title      :string(255)      not null
-#  type       :string(255)
+#  kind       :string(255)      default("feature")
 #  points     :integer
 #  state      :string(255)      not null
 #  created_at :datetime
 #  updated_at :datetime
 #  ord        :integer          not null
+#  maximized  :boolean          default(FALSE), not null
+#  deadline   :datetime
 #
 
 class Story < ActiveRecord::Base
@@ -24,6 +26,7 @@ class Story < ActiveRecord::Base
                   allow_nil: true }
   validates :state, inclusion: { in: %w(unstarted started finished accepted rejected) }
   validates :ord, numericality: { greater_than_or_equal_to: 0 }
+  validates :maximized, inclusion: { in: [true, false] }
   
   after_initialize :ensure_valid_state
   

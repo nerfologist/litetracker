@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   resource :session, only: [:new, :create, :destroy]
   
-  namespace :api, defauls: { format: :json } do
+  namespace :api, defaults: { format: :json } do
     resources :projects, except: [:new, :edit] do
       resources :tabs, except: [:new, :edit]
       resources :stories, except: [:new, :edit]

@@ -22,12 +22,14 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
     "use strict";
     var view = this;
     
-    this.listenTo(this.model, 'sync', this.render);
+    //this.listenTo(this.model, 'sync', this.render);
     this.listenTo(this.model.stories(), 'add', this.addStory);
     this.listenTo(this.model.stories(), 'remove', this.removeStory);
     this.listenTo(this.model.stories(), 'sync', this.refreshSortables);
+    this.listenTo(LiteTracker.Models.dispatcher,
+                  'renderComplete', this.onRender);
     
-    this.model.stories().each(function (story) {
+    this.model.stories().sort().each(function (story) {
       view.addStory(story);
     });
   },
@@ -39,11 +41,14 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
     
     this.attachSubviews();
     
+    this.onRender();
+    return this;
+  },
+  
+  onRender: function () {
     this.$('div.stories-column').sortable({
       connectWith: 'div.stories-column'
     });
-
-    return this;
   },
   
   addStory: function (story) {
@@ -75,7 +80,8 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
     
     $storyEls.each(function (idx) {
       var storyModel = view.model.stories().get($(this).data('story-id'));
-      storyModel.save({ ord: idx, tab_id: tabId });
+      storyModel.set({ ord: idx, tab_id: tabId });
+      storyModel.save();
     });
   },
   
@@ -84,7 +90,7 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
     event.stopPropagation();
     
     var story = this.model.stories().get($(ui.item).data('story-id'));
-    this.model.stories().remove(story);
+    this.model.stories().remove(story, { silent: true });
     LiteTracker.Collections.tempStories.add(story);
   },
   
@@ -95,7 +101,7 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
     var story = LiteTracker.Collections.
                   tempStories.get($(ui.item).data('story-id'));
     LiteTracker.Collections.tempStories.remove(story);
-    this.model.stories().add(story);
+    this.model.stories().add(story, { silent: true });
   },
   
   refreshSortables: function (event) {

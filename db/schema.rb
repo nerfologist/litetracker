@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140730002454) do
+ActiveRecord::Schema.define(version: 20140731000611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20140730002454) do
   create_table "projects", force: true do |t|
     t.string   "title",                  null: false
     t.integer  "owner_id",               null: false
-    t.integer  "velocity",   default: 5
+    t.integer  "capacity",   default: 5
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -40,15 +40,19 @@ ActiveRecord::Schema.define(version: 20140730002454) do
 
   create_table "stories", force: true do |t|
     t.integer  "tab_id"
-    t.string   "title",                          null: false
-    t.string   "kind",       default: "feature"
+    t.string   "title",                           null: false
+    t.string   "kind",        default: "feature"
     t.integer  "points"
-    t.string   "state",                          null: false
+    t.string   "state",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "ord",                            null: false
-    t.boolean  "maximized",  default: false,     null: false
+    t.integer  "ord",                             null: false
+    t.boolean  "maximized",   default: false,     null: false
+    t.datetime "deadline"
+    t.text     "description"
   end
+
+  add_index "stories", ["deadline"], name: "index_stories_on_deadline", using: :btree
 
   create_table "tabs", force: true do |t|
     t.string   "name",                      null: false

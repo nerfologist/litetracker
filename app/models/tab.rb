@@ -8,6 +8,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  ord        :integer          not null
+#  visible    :boolean          default(TRUE), not null
 #
 
 class Tab < ActiveRecord::Base

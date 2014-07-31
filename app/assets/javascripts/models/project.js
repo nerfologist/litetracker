@@ -67,7 +67,7 @@ LiteTracker.Models.Project = Backbone.Model.extend({
     
     switch (newState) {
     case 'started':
-      if (this.current().points() + story.get('points') < this.get('velocity')) {
+      if (this.current().points() + story.get('points') <= this.get('capacity')) {
         // move to current
         this.moveToTab(story, this.current());
       } else {
@@ -87,7 +87,7 @@ LiteTracker.Models.Project = Backbone.Model.extend({
   },
   
   availablePoints: function () {
-    return this.get('velocity') - this.current().points();
+    return this.get('capacity') - this.current().points();
   },
   
   // see if there are started stories in the backlog and bring them to current
