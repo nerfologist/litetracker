@@ -13,9 +13,11 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   },
   
   events: {
-    'sortupdate div.stories-column'   : 'persistStoryOrder',
-    'sortremove div.stories-column'   : 'dragStory',
-    'sortreceive div.stories-column'  : 'dropStory'
+    'sortupdate div.stories-column'     : 'persistStoryOrder',
+    'sortremove div.stories-column'     : 'dragStory',
+    'sortreceive div.stories-column'    : 'dropStory',
+    'sortactivate div.stories-column'   : 'highlightTab',
+    'sortdeactivate div.stories-column' : 'unHighlightTab'
   },
   
   initialize: function () {
@@ -110,5 +112,13 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   
   refreshSortables: function (event) {
     this.$('.stories-column').sortable("refreshPositions");
+  },
+  
+  highlightTab: function (event) {
+    this.$el.find('.tab').addClass('story-drop-allowed');
+  },
+  
+  unHighlightTab: function (event) {
+    this.$el.find('.tab').removeClass('story-drop-allowed');
   }
 });
