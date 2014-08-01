@@ -46,9 +46,13 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   },
   
   onRender: function () {
-    this.$('div.stories-column').sortable({
-      connectWith: 'div.stories-column'
-    });
+    var $storiesColumn = this.$('div.stories-column');
+    
+    $storiesColumn.sortable();
+    
+    if(['backlog', 'icebox'].indexOf(this.model.escape('name')) !== -1) {
+      $storiesColumn.sortable("option", "connectWith", '.stories-column.exportable');
+    }
   },
   
   addStory: function (story) {

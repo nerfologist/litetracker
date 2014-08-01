@@ -8,6 +8,6 @@
       </a>
     </nav>
   </div>
-  <div class='stories-column'>
+  <div class='stories-column <%= (['backlog', 'icebox'].indexOf(tab.escape('name')) !== -1) ? 'exportable' : '' %>'>
   </div>
 </div>
