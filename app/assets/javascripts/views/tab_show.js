@@ -115,10 +115,10 @@ LiteTracker.Views.TabShow = Backbone.CompositeView.extend({
   },
   
   highlightTab: function (event) {
-    this.$el.find('.tab').addClass('story-drop-allowed');
+    this.$('.tab').addClass('story-drop-allowed');
   },
   
   unHighlightTab: function (event) {
-    this.$el.find('.tab').removeClass('story-drop-allowed');
+    this.$('.tab').removeClass('story-drop-allowed');
   }
 });
