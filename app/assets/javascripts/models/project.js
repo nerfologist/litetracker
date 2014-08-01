@@ -77,6 +77,7 @@ LiteTracker.Models.Project = Backbone.Model.extend({
       }
       break;
     case 'accepted':
+      story.set({maximized: false});
       this.moveToTab(story, this.done());
       break;
     default:
