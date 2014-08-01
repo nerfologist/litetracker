@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.1.2'
 
 gem 'backbone-on-rails'
 gem 'bcrypt'
@@ -12,6 +13,7 @@ gem 'pg'
 gem 'rails', '4.1.4'
 gem 'sass-rails', '~> 4.0.3'
 gem 'serialize_json-rails'
+gem 'thin'
 gem 'uglifier', '>= 1.3.0'
 
 group :doc do
