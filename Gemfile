@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-#ruby '2.1.2'
+ruby '2.1.2'
 
 gem 'backbone-on-rails'
 gem 'bcrypt'
@@ -24,7 +24,6 @@ group :development do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'debugger'
   gem 'pry-rails'
 end
 
