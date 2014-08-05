@@ -33,10 +33,10 @@ Current herokuapp website: http://litetracker.herokuapp.com/
   - add a logo ✓
   - add a captivating homepage ✓
   - add demo user & seed content ✓
-  - DRYing out code
-  - fixing quirks
+  - DRYing out code ✓
+  - fixing quirks ✓
 5. Extra
-  - implement collaboration
+  - implement collaboration (TODO)
 
 ## Class diagram
 ![](https://raw.githubusercontent.com/nerfologist/docs/master/images/class_diagram.png)
@@ -54,21 +54,20 @@ Current herokuapp website: http://litetracker.herokuapp.com/
 - Project: activity that we want to track. Can be divided in stories
 - Story: synthetic description of a use case. Its complexity can be evaluated in points. Also: a concrete or deliverable task
 - Tab: container for stories
-- Velocity: points that can be completed at every time unit.
+- Capacity: total units of work that can be carried out in parallel by the team.
 
 ## Planned features
-- account creation/auth
-- user can create projects
-- projects come with four tabs (story containers): current, backlog, icebox, done
-- user can create stories. Stories are created in the icebox tab
-- Current tab must contain the current stories at all times
-- user can evaluate the complexity of stories from "1: trivial" to "4: very complex"
-- user can start, finish deliver, accept or reject stories
-- user can set stories' priority (only for stories that have not been started yet)
-- user can set a velocity. A default velocity must be assumed
+- account creation/auth ✓
+- user can create projects ✓
+- projects come with four tabs (story containers): current, backlog, icebox, done ✓
+- user can create stories. Stories are created in the icebox tab ✓
+- Current tab must contain the current stories at all times ✓
+- user can evaluate the complexity of stories from "1: trivial" to "4: very complex" ✓
+- user can start, finish deliver, accept or reject stories ✓
+- user can set stories' priority (only for stories that have not been started yet) ✓
+- user can set a capacity. A default capacity must be assumed ✓
 
 
 ### Optional features
-- variable time unit length (week, day, month)
 - user can invite other users to collaborate on his project (collaboration)
 - user has an event timeline
