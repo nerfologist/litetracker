@@ -20,7 +20,8 @@ RSpec.describe User, :type => :model do
     u = FactoryGirl.create(:user)
     expect(User.find_by_credentials(
       email: u.email,
-      password: u.password)).to eq(u)
+      password: u.password)
+    ).to eq(u)
   end
 
   context "when checking passwords against his own" do
