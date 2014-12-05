@@ -26,7 +26,6 @@ class Story < ActiveRecord::Base
                   allow_nil: true }
   validates :state, inclusion: { in: %w(unstarted started finished accepted rejected) }
   validates :ord, numericality: { greater_than_or_equal_to: 0 }
-  validates :ord, uniqueness: { scope: :tab }
   validates :maximized, inclusion: { in: [true, false] }
   
   after_initialize :ensure_valid_state

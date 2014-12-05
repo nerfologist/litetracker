@@ -17,4 +17,5 @@
 /log/*.log
 /tmp
 
+# Ignore .DS_Store
 .DS_Store

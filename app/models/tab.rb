@@ -13,7 +13,6 @@
 
 class Tab < ActiveRecord::Base
   validates :name, :ord, presence: true
-  validates :project, presence: true
   validates :visible, inclusion: { in: [true, false] }
   validates :name, uniqueness: { scope: :project_id }
   validates :ord, numericality: { greater_than_or_equal_to: 0 }
