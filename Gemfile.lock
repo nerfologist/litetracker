@@ -53,6 +53,9 @@ GEM
     bootstrap-sass (3.1.1.1)
       sass (~> 3.2)
     builder (3.2.2)
+    byebug (3.2.0)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
     celluloid (0.16.0)
       timers (~> 4.0.0)
     coderay (1.1.0)
@@ -63,8 +66,10 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.1)
+    columnize (0.8.9)
     daemons (1.1.9)
     debug_inspector (0.0.2)
+    debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
     eco (1.0.0)
       coffee-script
@@ -189,6 +194,8 @@ GEM
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
     serialize_json-rails (0.0.1)
+    shoulda-matchers (2.7.0)
+      activesupport (>= 3.0.0)
     slop (3.5.0)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -227,6 +234,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
+  byebug
   coffee-rails (~> 4.0.0)
   factory_girl_rails
   faker
@@ -243,5 +251,6 @@ DEPENDENCIES
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   serialize_json-rails
+  shoulda-matchers
   thin
   uglifier (>= 1.3.0)

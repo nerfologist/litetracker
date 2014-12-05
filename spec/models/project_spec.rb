@@ -18,7 +18,7 @@ RSpec.describe Project, :type => :model do
   end
 
   context "when enforcing title uniqueness" do
-    it "enforces title uniqueness for an owner" do
+    it "enforces it for an owner" do
       joe = create(:user)
       create(:project, title: 'my dup project', owner: joe)
       bad_p = build(:project, title: 'my dup project', owner: joe)
@@ -26,7 +26,7 @@ RSpec.describe Project, :type => :model do
       expect(bad_p.errors[:title]).to include("has already been taken")
     end
 
-    it "does not enforce title uniqueness for different owners" do
+    it "does not enforce it for different owners" do
       create(:project, title: "yet another dup project")
       expect(build(:project, title: "yet another dup project")).to be_valid
     end
