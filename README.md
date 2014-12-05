@@ -2,7 +2,7 @@
 ## a Pivotal Tracker clone
 A lightweight helping tool for Agile software developing.
 
-Current herokuapp website: http://litetracker.herokuapp.com/
+Current website: http://www.litetracker.net
 
 ## Current status:
 **under construction**
