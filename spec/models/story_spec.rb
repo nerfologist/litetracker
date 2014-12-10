@@ -25,9 +25,6 @@ RSpec.describe Story, :type => :model do
   end
 
   context "when enforcing ord uniqueness" do
-    before :all do
-      @story = build(:story, ord: 1)
-    end
     let(:s1) { create(:story, ord: 1) }
 
     it "ensures ord is unique in tab scope" do
@@ -65,5 +62,9 @@ RSpec.describe Story, :type => :model do
 
   it "ensures maximized is not nil" do
     is_expected.not_to allow_value(nil).for(:maximized)
+  end
+
+  it "falls back to 'unstarted' state if not declared" do
+    expect(Story.new().state).to eq('unstarted')
   end
 end
