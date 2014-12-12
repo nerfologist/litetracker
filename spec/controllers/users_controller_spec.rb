@@ -35,7 +35,7 @@ RSpec.describe UsersController, :type => :controller do
       end
 
       it "re-renders the :new template" do
-        post :create, user: attributes_for(:user_no_email)
+        post :create, user: attributes_for(:user_blank_password)
         expect(response).to render_template :new
       end
     end

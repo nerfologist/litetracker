@@ -7,8 +7,8 @@ FactoryGirl.define do
       email nil
     end
 
-    factory :user_no_password do
-      password nil
+    factory :user_blank_password do
+      password ''
     end
   end
 end
