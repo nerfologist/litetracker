@@ -11,7 +11,7 @@ RSpec.describe StaticPagesController, :type => :controller do
   describe "GET #root" do
     context "when the user is signed in" do
       it "loads the root page" do
-        allow(controller).to receive(:signed_in?).and_return(true)
+        allow(controller).to receive(:require_signed_in!)
         get :root
         expect(response).to render_template :root
       end
