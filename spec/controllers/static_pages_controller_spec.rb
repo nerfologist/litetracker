@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe StaticPagesController, :type => :controller do
+  def emulate_login(user)
+    session[:session_token] = user.session_token
+  end
+
   describe "GET #startpage" do
     it "renders the startpage template" do
       get :startpage
@@ -11,7 +15,8 @@ RSpec.describe StaticPagesController, :type => :controller do
   describe "GET #root" do
     context "when the user is signed in" do
       it "loads the root page" do
-        allow(controller).to receive(:require_signed_in!)
+        #allow(controller).to receive(:require_signed_in!)
+        emulate_login(create(:user))
         get :root
         expect(response).to render_template :root
       end
