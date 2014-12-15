@@ -10,5 +10,9 @@ FactoryGirl.define do
     factory :user_blank_password do
       password ''
     end
+
+    factory :demo_user do
+      email 'demo@users.com'
+    end
   end
 end
