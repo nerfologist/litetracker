@@ -17,11 +17,11 @@ RSpec.describe SessionsController, :type => :controller do
   end
 
   describe "POST #create" do
-    context "with valid attributes" do
-      before :all do
-        @valid_user = create(:user)
-      end
+    before :all do
+      @valid_user = create(:user)
+    end
 
+    context "with valid attributes" do
       before :each do
         post :create, user: {
           email: @valid_user.email,
@@ -29,7 +29,11 @@ RSpec.describe SessionsController, :type => :controller do
         }
       end
 
-      it "signs in the user" do
+      it "finds and assigns the user to current_user" do
+        expect(assigns[:current_user]).to eq(@valid_user)
+      end
+
+      it "sets the session token in the cookie" do
         expect(session[:session_token]).not_to be_nil
       end
 
@@ -39,12 +43,39 @@ RSpec.describe SessionsController, :type => :controller do
     end
 
     context "with invalid attributes" do
+      before :each do
+        post :create, user: {
+          email: Faker::Internet.email,
+          password: Faker::Internet.password(8)
+        }
+      end
 
+      it "does not set any user to current_user" do
+        expect(assigns[:current_user]).to be_nil
+      end
+
+      it "does not set the session token in the cookie" do
+        expect(session[:session_token]).to be_nil
+      end
+
+      it "redirects to the new session page" do
+        expect(response).to redirect_to new_session_url
+      end
     end
   end
 
   describe "DELETE #destroy" do
+    before :each do
+      delete :destroy
+    end
 
+    it "sets the session token in the cookie to nil" do
+      expect(session[:session_token]).to be_nil
+    end
+
+    it "redirects to the root url" do
+      expect(response).to redirect_to root_url
+    end
   end
 
   describe "#demo" do
