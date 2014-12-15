@@ -21,6 +21,10 @@ RSpec.describe SessionsController, :type => :controller do
       @valid_user = create(:user)
     end
 
+    after :all do
+      @valid_user.destroy
+    end
+
     context "with valid attributes" do
       before :each do
         post :create, user: {
@@ -78,7 +82,11 @@ RSpec.describe SessionsController, :type => :controller do
     end
   end
 
-  describe "#demo" do
-
+  describe "GET #demo" do
+    it "redirects to the backbone start page" do
+      create(:demo_user)
+      get :demo
+      expect(response).to redirect_to go_url
+    end
   end
 end
