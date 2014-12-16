@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe StaticPagesController, :type => :controller do
-  def emulate_login(user)
-    session[:session_token] = user.session_token
-  end
-
   describe "GET #startpage" do
     it "renders the startpage template" do
       get :startpage
