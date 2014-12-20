@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pry-byebug'
 
 RSpec.describe SessionsController, :type => :controller do
   describe "GET #new" do
