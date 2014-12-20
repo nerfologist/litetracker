@@ -11,7 +11,7 @@ RSpec.describe User, :type => :model do
     expect(u.errors[:email]).to include("can't be blank")
   end
 
-  it "is invalid if it has the same email as another user" do
+  it "has a unique email address" do
     u = create(:user)
     u2 = build(:user, email: u.email)
     u2.valid?

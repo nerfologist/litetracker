@@ -15,6 +15,7 @@ module LiteTracker
     config.active_record.default_timezone = :local
 
     config.generators do |g|
+      # g.stylesheets false
       g.test_framework :rspec,
         :fixtures => true,
         :view_specs => false,
