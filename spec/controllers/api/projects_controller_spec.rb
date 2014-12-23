@@ -9,49 +9,66 @@ RSpec.describe Api::ProjectsController, :type => :controller do
       @project1 = create(:project, owner: @user)
       @project2 = create(:project, owner: @user)
     end
-    
+
     after(:all) do
       DatabaseCleaner.clean_with(:truncation)
     end
-    
+
     after :each do
-      expect(response).to redirect_to new_session_url
+      expect(response.status).to eq(401) 
     end
-    
+
     describe "GET #index" do
       it "requires login" do
         get :index
       end
     end
-    
+
     describe "GET #show" do
       it "requires login" do
         get :show, id: @project1
       end
     end
-    
+
     describe "POST #create" do
       it "requires login" do
         post :create, project: attributes_for(:project, owner: @user)
       end
     end
-    
+
     describe "PATCH #update" do
       it "requires login" do
         patch :update, id: @project1, project: attributes_for(:project)
       end
     end
-    
+
     describe "DELETE #destroy" do
       it "requires login" do
         delete :destroy, id: @project1
       end
     end
   end
-  
+
   describe "user access" do
     before :each do
-      emulate_login(create(:user))
+      @user = create(:user)
+      emulate_login(@user)
+      @project1 = create(:project, owner: @user)
+      @project2 = create(:project, owner: @user)
+    end
+
+    after :each do
+      expect(response.headers['Content-Type']).to match 'application/json'
+    end
+
+    describe "GET #index" do
+      it "returns a list of the user's projects" do
+        get :index
+        expect(JSON.parse(response.body)).to match_array(
+          [JSON.parse(@project1.to_json),
+           JSON.parse(@project2.to_json)]
+        )
+      end
     end
   end
 end

@@ -1,9 +1,11 @@
 module Api
   class ApiController < ApplicationController
-    before_action :require_signed_in!
+    before_action :api_require_signed_in!
 
-    def require_board_member!
-      redirect_to new_session_url unless current_board.is_member?(current_user)
+    private
+
+    def api_require_signed_in!
+      return head :unauthorized unless signed_in?
     end
   end
 end

@@ -1,5 +1,7 @@
 module Api
   class ProjectsController < ApiController
+    respond_to :json
+
     def index
       render json: current_user.projects
     end
