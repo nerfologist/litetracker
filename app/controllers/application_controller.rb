@@ -28,8 +28,4 @@ class ApplicationController < ActionController::Base
   def require_signed_in!
     redirect_to new_session_url unless signed_in?
   end
-
-  def api_require_signed_in!
-    return head :forbidden unless signed_in?
-  end
 end

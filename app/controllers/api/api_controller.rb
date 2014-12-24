@@ -1,6 +1,7 @@
 module Api
   class ApiController < ApplicationController
     before_action :api_require_signed_in!
+    respond_to :json
 
     private
 
