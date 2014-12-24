@@ -14,8 +14,13 @@ RSpec.describe Api::ProjectsController, :type => :controller do
       DatabaseCleaner.clean_with(:truncation)
     end
 
+    before :each do
+      request.env['HTTP_ACCEPT'] = 'application/json'
+      request.env['HTTP_CONTENT_TYPE'] = 'application/json'
+    end
+
     after :each do
-      expect(response.status).to eq(401) 
+      expect(response.status).to eq(401) # unauthorized 
     end
 
     describe "GET #index" do
@@ -26,25 +31,25 @@ RSpec.describe Api::ProjectsController, :type => :controller do
 
     describe "GET #show" do
       it "requires login" do
-        get :show, id: @project1
+        get :show, { id: @project1 }
       end
     end
 
     describe "POST #create" do
       it "requires login" do
-        post :create, project: attributes_for(:project, owner: @user)
+        post :create, { project: attributes_for(:project, owner: @user) }
       end
     end
 
     describe "PATCH #update" do
       it "requires login" do
-        patch :update, id: @project1, project: attributes_for(:project)
+        patch :update, { id: @project1, project: attributes_for(:project) }
       end
     end
 
     describe "DELETE #destroy" do
       it "requires login" do
-        delete :destroy, id: @project1
+        delete :destroy, { id: @project1 }
       end
     end
   end
@@ -55,6 +60,11 @@ RSpec.describe Api::ProjectsController, :type => :controller do
       emulate_login(@user)
       @project1 = create(:project, owner: @user)
       @project2 = create(:project, owner: @user)
+      @project3 = create(:project)
+
+      # emulate JSON request
+      request.env['HTTP_ACCEPT'] = 'application/json'
+      request.env['HTTP_CONTENT_TYPE'] = 'application/json'
     end
 
     after :each do
@@ -63,7 +73,7 @@ RSpec.describe Api::ProjectsController, :type => :controller do
 
     describe "GET #index" do
       it "returns a list of the user's projects" do
-        get :index
+        get :index, format: :json
         expect(JSON.parse(response.body)).to match_array(
           [JSON.parse(@project1.to_json),
            JSON.parse(@project2.to_json)]

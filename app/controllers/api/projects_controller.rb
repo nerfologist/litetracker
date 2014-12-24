@@ -1,18 +1,16 @@
 module Api
   class ProjectsController < ApiController
-    respond_to :json
-
     def index
-      render json: current_user.projects
+      respond_with current_user.projects
     end
   
     def show
       project = current_user.projects.find_by(id: params[:id])
     
       if project
-        render json: project, include: { tabs: { include: :stories } }
+        respond_with project, include: { tabs: { include: :stories } }
       else
-        render json: ['the referenced project was not found'], status: 404
+        respond_with ['the referenced project was not found'], status: 404
       end
     end
   
@@ -26,9 +24,9 @@ module Api
       ])
     
       if project.save
-        render json: project, include: :tabs
+        respond_with project, include: :tabs
       else
-        render json: project.errors.full_messages, status: :unprocessable_entity
+        respond_with project.errors.full_messages, status: :unprocessable_entity
       end
     end
   
@@ -36,9 +34,9 @@ module Api
       project = current_user.projects.find_by(id: params[:id])
     
       if project && project.update_attributes(project_params)
-        render json: project
+        respond_with project
       else
-        render json: project.errors.full_messages, status: :unprocessable_entity
+        respond_with project.errors.full_messages, status: :unprocessable_entity
       end
     end
   
@@ -46,9 +44,9 @@ module Api
       project = current_user.projects.find_by(id: params[:id])
     
       if project && project.destroy()
-        render json: project
+        respond_with project
       else
-        render json: ['unable to delete project'], status: :unprocessable_entity
+        respond_with ['unable to delete project'], status: :unprocessable_entity
       end
     end
   
