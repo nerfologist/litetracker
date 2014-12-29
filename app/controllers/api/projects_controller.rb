@@ -10,7 +10,7 @@ module Api
       if project
         respond_with project, include: { tabs: { include: :stories } }
       else
-        respond_with ['the referenced project was not found'], status: 404
+        render json: ['the referenced project was not found'], status: 404
       end
     end
   
@@ -24,9 +24,9 @@ module Api
       ])
     
       if project.save
-        respond_with :api, project
+        respond_with project, location: nil
       else
-        respond_with project.errors.full_messages, status: :unprocessable_entity
+        render json: project.errors.full_messages, status: :unprocessable_entity
       end
     end
   
@@ -34,9 +34,9 @@ module Api
       project = current_user.projects.find_by(id: params[:id])
     
       if project && project.update_attributes(project_params)
-        respond_with project
+        respond_with project, location: nil
       else
-        respond_with project.errors.full_messages, status: :unprocessable_entity
+        render json: project.errors.full_messages, status: :unprocessable_entity
       end
     end
   
@@ -44,9 +44,9 @@ module Api
       project = current_user.projects.find_by(id: params[:id])
     
       if project && project.destroy()
-        respond_with project
+        respond_with project, location: nil
       else
-        respond_with ['unable to delete project'], status: :unprocessable_entity
+        render json: ['unable to delete project'], status: :unprocessable_entity
       end
     end
   
