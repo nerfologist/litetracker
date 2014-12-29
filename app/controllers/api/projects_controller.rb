@@ -24,7 +24,7 @@ module Api
       ])
     
       if project.save
-        respond_with project, include: :tabs
+        respond_with :api, project
       else
         respond_with project.errors.full_messages, status: :unprocessable_entity
       end
