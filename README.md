@@ -1,13 +1,20 @@
 # LiteTracker
-## a Pivotal Tracker clone
+*a Pivotal Tracker clone*
+
 A lightweight helping tool for Agile software developing.
 
 Current website: http://www.litetracker.net
 
-## Current status:
-**under construction**
+## TODO list:
+- [X] Model tests
+- [X] Controller tests (HTML)
+- [ ] API Controller tests (JSON)
+- [ ] Add automatic story reference id/#
+- [ ] Collaboration model
+- [ ] User timeline
+- [ ] Project timeline
 
-## Next steps:
+## Done list:
 1. Working Rails API
   - user model & controller, auth ✓
   - session controller ✓
@@ -35,8 +42,6 @@ Current website: http://www.litetracker.net
   - add demo user & seed content ✓
   - DRYing out code ✓
   - fixing quirks ✓
-5. Extra
-  - implement collaboration (TODO)
 
 ## Class diagram
 ![](https://raw.githubusercontent.com/nerfologist/docs/master/images/class_diagram.png)
@@ -66,8 +71,3 @@ Current website: http://www.litetracker.net
 - user can start, finish deliver, accept or reject stories ✓
 - user can set stories' priority (only for stories that have not been started yet) ✓
 - user can set a capacity. A default capacity must be assumed ✓
-
-
-### Optional features
-- user can invite other users to collaborate on his project (collaboration)
-- user has an event timeline
