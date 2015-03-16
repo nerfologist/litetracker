@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Api::ProjectsController, :type => :controller do
+  before :each do
+    request.env['HTTP_ACCEPT'] = 'application/json'
+    request.env['HTTP_CONTENT_TYPE'] = 'application/json'
+  end
+
   describe "guest access" do
     # no need to create them for every single example here
     # they won't be modified anyway (hopefully)
@@ -14,10 +19,6 @@ RSpec.describe Api::ProjectsController, :type => :controller do
       DatabaseCleaner.clean_with(:truncation)
     end
 
-    before :each do
-      request.env['HTTP_ACCEPT'] = 'application/json'
-      request.env['HTTP_CONTENT_TYPE'] = 'application/json'
-    end
 
     after :each do
       expect(response.status).to eq(401) # unauthorized 
@@ -55,16 +56,19 @@ RSpec.describe Api::ProjectsController, :type => :controller do
   end
 
   describe "user access" do
-    before :each do
+    before :all do
       @user = create(:user)
+    end
+
+    after :all do
+      DatabaseCleaner.clean_with :truncation
+    end
+
+    before :each do
       emulate_login(@user)
       @project1 = create(:project, owner: @user)
       @project2 = create(:project, owner: @user)
       @project3 = create(:project)
-
-      # emulate JSON request
-      request.env['HTTP_ACCEPT'] = 'application/json'
-      request.env['HTTP_CONTENT_TYPE'] = 'application/json'
     end
 
     after :each do
@@ -74,10 +78,27 @@ RSpec.describe Api::ProjectsController, :type => :controller do
     describe "GET #index" do
       it "returns a list of the user's projects" do
         get :index, format: :json
-        expect(JSON.parse(response.body)).to match_array(
+        expect(json).to match_array(
           [JSON.parse(@project1.to_json),
            JSON.parse(@project2.to_json)]
         )
+      end
+    end
+
+    describe "GET #show" do
+      it "returns the specified project" do
+        get :show, id: @project1.id
+
+        expect(json['title']).to eq(@project1.title)
+        expect(json['id']).to eq(@project1.id)
+      end
+    end
+
+    describe "POST #create" do
+      it "creates project" do
+        expect {
+          post :create, project: attributes_for(:project, owner: @user)
+        }.to change(Project, :count).by(1)
       end
     end
   end
