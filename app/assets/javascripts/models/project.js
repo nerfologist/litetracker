@@ -4,7 +4,7 @@ LiteTracker.Models.Project = Backbone.Model.extend({
   parse: function (payload) {
     "use strict";
     if(payload.tabs) {
-      this.tabs().set(payload.tabs, { parse: true });
+      this.tabs().set(payload.tabs);
       delete payload.tabs;
     }
         
