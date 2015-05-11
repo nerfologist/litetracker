@@ -43,7 +43,7 @@ LiteTracker.Views.StoryShow = Backbone.View.extend({
   
   onRender: function () {
     // hack to make it work after tab drag&drop
-    this.initDatePicker()
+    this.initDatePicker();
   },
   
   maximizeStory: function (event) {

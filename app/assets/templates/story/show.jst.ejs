@@ -2,31 +2,30 @@
   <div class='story-controls-left'>
     <a href='#' class='expand'>
       <span class='glyphicon <%= story.get('maximized') ? 'glyphicon-chevron-down' : 'glyphicon-chevron-right' %>'>
-      </a>
-      <a href='#' class='story-icon'>
-        <% var kind = story.get('kind') %>
-        <% if (kind === 'feature') { %>
-          <span class='glyphicon glyphicon-star'>
-        <% } else if (kind === 'bug') { %>
-          <span class='glyphicon glyphicon-screenshot'>
-        <% } else if (kind === 'chore') { %>
-          <span class='glyphicon glyphicon-list-alt'>
-        <% } else if (kind === 'release') { %>
-          <span class='glyphicon glyphicon-flag'>
-        <% } %>
-      </a>
-    </div>
-    <div class='story-title'>
-      <%= story.escape('title') %>
-    </div>
-    <div class='story-controls-right'>
-      <a href='#' class='trash'>
-        <span class='glyphicon glyphicon-trash'>
-        </a>
-      </div>
-    </div>
+    </a>
+    <a href='#' class='story-icon'>
+      <% var kind = story.get('kind') %>
+      <% if (kind === 'feature') { %>
+        <span class='glyphicon glyphicon-star'>
+      <% } else if (kind === 'bug') { %>
+        <span class='glyphicon glyphicon-screenshot'>
+      <% } else if (kind === 'chore') { %>
+        <span class='glyphicon glyphicon-list-alt'>
+      <% } else if (kind === 'release') { %>
+        <span class='glyphicon glyphicon-flag'>
+      <% } %>
+    </a>
+  </div>
+  <div class='story-title'>
+    <%= story.escape('title') %>
+  </div>
+  <div class='story-controls-right'>
+    <a href='#' class='trash'>
+      <span class='glyphicon glyphicon-trash'>
+    </a>
   </div>
 </div>
+
 <div class='story-details'>
   <div class='container-fluid'>
     
