@@ -40,7 +40,10 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner'
+  gem 'capybara', '~> 2.4.4'
+  gem 'database_cleaner', '~> 1.4.1'
+  gem 'launchy', '~> 2.4.3' 
+  gem 'selenium-webdriver', '~> 2.45.0'
   gem 'shoulda-matchers', require: false
   gem 'guard-rspec'
   gem 'nyan-cat-formatter'
