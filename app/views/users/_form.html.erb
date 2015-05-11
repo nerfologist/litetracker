@@ -1,4 +1,4 @@
-<form action='<%= action %>' method='POST' role='form'>
+<form action='<%= action %>' method='POST' role='form' id='user_form'>
   <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
   <% if user.persisted? %>
   <input type='hidden' name='_method' value='PATCH'>
@@ -11,7 +11,7 @@
 
   <div class='form-group'>
     <label for='user_password'>Password</label>
-    <input type='password' name='user[password]' value='' class='form-control'>
+    <input type='password' id='user_password' name='user[password]' value='' class='form-control'>
   </div>
 
   <input type='submit'
