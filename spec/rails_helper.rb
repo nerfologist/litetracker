@@ -18,9 +18,9 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
+  # fast headless JavaScript driver. Comment to use Selenium instead
+  Capybara.javascript_driver = :webkit
+
   # if you set it to true, js feature tests will fail for lack of a common
   # database session
   config.use_transactional_fixtures = false
@@ -29,17 +29,23 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with :truncation
   end
 
-  config.around :each do |example|
+  config.before :each do |example|
     if example.metadata[:js]
-      # use truncation, not transaction for js tests
-      DatabaseCleaner.strategy = :truncation
+      DatabaseCleaner.strategy = :deletion
     else
       DatabaseCleaner.strategy = :transaction
     end
 
-    DatabaseCleaner.cleaning do
-      example.run
-    end
+    DatabaseCleaner.start
+  end
+
+  config.after :each do
+    DatabaseCleaner.clean
+  end
+
+  # block all external URLs (network probs might pollute test results)
+  config.before(:each, js: true) do
+    page.driver.block_unknown_urls
   end
 
   # Omit "FactoryGirl." in front of method calls
@@ -47,6 +53,7 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
 
+  config.include EmulateLoginMacros
   config.include LoginMacros
   config.include JsonMacros
 end
