@@ -1,6 +1,6 @@
 LiteTracker.Models.Tab = Backbone.Model.extend({  
   parse: function (payload) {
-    "use strict";
+    'use strict';
     if (payload.stories) {
       this.stories().set(payload.stories, { tab: this });
       delete payload.stories;
@@ -10,12 +10,12 @@ LiteTracker.Models.Tab = Backbone.Model.extend({
   },
   
   project: function () {
-    "use strict";
+    'use strict';
     return this.collection.project;
   },
   
   stories: function () {
-    "use strict";
+    'use strict';
     this._stories = this._stories ||
                     new LiteTracker.Collections.Stories([], { tab: this });
     return this._stories;

@@ -1,49 +1,50 @@
 LiteTracker.Models.Project = Backbone.Model.extend({
   urlRoot: '/api/projects',
-  
+
   parse: function (payload) {
-    "use strict";
+    'use strict';
     if(payload.tabs) {
       this.tabs().set(payload.tabs);
       delete payload.tabs;
     }
-        
+
     return payload;
   },
-  
+
   tabs: function () {
-    "use strict";
+    'use strict';
     this._tabs = this._tabs ||
                  new LiteTracker.Collections.Tabs([], { project: this });
     return this._tabs;
   },
-  
+
   findTab: function (tabName) {
+    'use strict';
     return this.tabs().find(function (tab) {
       return tab.get('name') === tabName;
     });
   },
-  
+
   current: function () {
-    "use strict";
+    'use strict';
     return this.findTab('current');
   },
-  
+
   backlog: function () {
-    "use strict";
+    'use strict';
     return this.findTab('backlog');
   },
-  
+
   done: function () {
-    "use strict";
+    'use strict';
     return this.findTab('done');
   },
-  
+
   moveToTab: function (story, newTab) {
-    "use strict";
+    'use strict';
     var maxOrd;
     var project = this;
-    
+
     if(newTab.stories().length === 0) {
       maxOrd = -1; // will become 0
     } else {
@@ -52,20 +53,18 @@ LiteTracker.Models.Project = Backbone.Model.extend({
 
     story.save({ tab_id: newTab.id, ord: maxOrd + 1 }, {
       success: function () {
-        "use strict";
-
         story.collection.remove(story);
         newTab.stories().add(story);
         project.populateCurrent();
       }
     });
   },
-  
+
   requestStateChange: function (story, newState) {
-    "use strict";
+    'use strict';
 
     story.set('state', newState);
-    
+
     switch (newState) {
     case 'started':
       if (this.current().points() + story.get('points') <= this.get('capacity')) {
@@ -85,16 +84,18 @@ LiteTracker.Models.Project = Backbone.Model.extend({
       break;
     }
   },
-  
+
   availablePoints: function () {
+    'use strict';
     return this.get('capacity') - this.current().points();
   },
-  
+
   // see if there are started stories in the backlog and bring them to current
   populateCurrent: function () {
+    'use strict';
     var project = this;
     var movedPoints = 0;
-    
+
     this.backlog().stories().sort().each(function (story) {
       if (project.availablePoints() - movedPoints >= story.get('points')) {
         movedPoints += story.get('points');
