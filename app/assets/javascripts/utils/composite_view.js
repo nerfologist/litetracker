@@ -1,4 +1,4 @@
-(function (){
+(function () {
   'use strict';
 
   Backbone.CompositeView = Backbone.View.extend({
@@ -72,4 +72,5 @@
       return this._subviews[selector];
     }
   });
+
 }());

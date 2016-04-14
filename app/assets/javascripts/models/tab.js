@@ -1,10 +1,14 @@
 (function () {
   'use strict';
 
-  LiteTracker.Models.Tab = Backbone.Model.extend({  
+  LiteTracker.Models.Tab = Backbone.Model.extend({
+    defaults: {},
+
     parse: function (payload) {
       if (payload.stories) {
-        this.stories().set(payload.stories, { parse: true, tab: this });
+        this.stories().set(payload.stories, {
+          tab: this
+        });
         delete payload.stories;
       }
 
@@ -17,7 +21,9 @@
 
     stories: function () {
       this._stories = this._stories ||
-        new LiteTracker.Collections.Stories([], { tab: this });
+      new LiteTracker.Collections.Stories([], {
+        tab: this
+      });
       return this._stories;
     },
 
@@ -27,4 +33,5 @@
       }, 0);
     }
   });
+
 }());

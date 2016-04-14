@@ -1,13 +1,17 @@
-window.LiteTracker = {
-  Models: {},
-  Collections: {},
-  Views: {},
-  Routers: {},
-  initialize: function() {
-    "use strict";
-    new LiteTracker.Routers.AppRouter({
-      $rootEl: $('div#main')
-    });
-    Backbone.history.start();
-  }
-};
+(function () {
+  'use strict';
+
+  window.LiteTracker = {
+    Models: {},
+    Collections: {},
+    Views: {},
+    Routers: {},
+    initialize: function () {
+      new LiteTracker.Routers.AppRouter({
+        $rootEl: $('div#main')
+      });
+      Backbone.history.start();
+    }
+  };
+
+}());

@@ -2,11 +2,13 @@
   'use strict';
 
   LiteTracker.Models.Story = Backbone.Model.extend({
+    defaults: {},
+
     urlRoot: function () {
       return this.project.url() + '/stories';
     },
 
-    validate: function (attributes, options) {
+    validate: function (attributes) {
       if (attributes.ord < 0) {
         return 'ord cannot be less than 0';
       }
@@ -31,4 +33,5 @@
       this.project().requestStateChange(this, 'accepted');
     }
   });
+
 }());

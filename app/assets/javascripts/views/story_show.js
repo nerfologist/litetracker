@@ -1,8 +1,20 @@
+/*eslint backbone/no-native-jquery: 0 */
 (function () {
   'use strict';
 
   LiteTracker.Views.StoryShow = Backbone.View.extend({
-    initialize: function (options) {
+    events: {
+      'click div.story-controls a.expand'        : 'maximizeStory',
+      'click div.story-controls a.trash'         : 'confirmDeleteStory',
+      'click button#btn-delete-story'            : 'deleteStory',
+      'change form#std-attributes'               : 'updateStory',
+      'submit form#std-attributes'               : 'updateStory',
+      'click button.btn-change-story-state'      : 'advanceStoryState',
+      'click button.btn-reject-story'            : 'rejectStory',
+      'changeDate input[name="story[deadline]"]' : 'setDeadline'
+    },
+
+    initialize: function () {
       this.listenTo(this.model, 'sync', this.render);
       this.listenTo(this.$('#btn-delete-story'), 'click', this.catchClick);
       this.listenTo(LiteTracker.Models.dispatcher,
@@ -22,17 +34,6 @@
       };
     },
 
-    events: {
-      'click div.story-controls a.expand'        : 'maximizeStory',
-      'click div.story-controls a.trash'         : 'confirmDeleteStory',
-      'click button#btn-delete-story'            : 'deleteStory',
-      'change form#std-attributes'               : 'updateStory',
-      'submit form#std-attributes'               : 'updateStory',
-      'click button.btn-change-story-state'      : 'advanceStoryState',
-      'click button.btn-reject-story'            : 'rejectStory',
-      'changeDate input[name="story[deadline]"]' : 'setDeadline'
-    },
-
     render: function () {
       var renderedContent = this.template({ story: this.model });
       this.$el.html(renderedContent);
@@ -47,15 +48,16 @@
     },
 
     maximizeStory: function (event) {
-      event.preventDefault();
       var $target = $(event.target);
+
+      event.preventDefault();
 
       // persist maximized
       if(this.model.get('maximized')) {
         this.model.save({ maximized: false });
       } else {
         this.model.save({ maximized: true });
-      };
+      }
 
       $target.closest('div.story').toggleClass('maximized');
       $target.toggleClass('glyphicon-chevron-right')
@@ -70,7 +72,7 @@
       $('#storyDeletionModal').modal();
     },
 
-    deleteStory: function (event) {
+    deleteStory: function () {
       var $modal = $('#storyDeletionModal');
       $('#storyDeletionModal').modal('hide');
       $('body').removeClass('modal-open');
@@ -84,9 +86,9 @@
     },
 
     updateStory: function (event) {
+      var storyParams = this.$('form#std-attributes').serializeJSON().story;
       event.preventDefault();
 
-      var storyParams = this.$('form#std-attributes').serializeJSON().story;
       this.model.save(storyParams);
     },
 
@@ -100,11 +102,11 @@
       switch(this.model.get('state')) {
         case 'started':
           this.model.set('state', 'finished');
-        this.setStateClass('finished');
-        break;
+          this.setStateClass('finished');
+          break;
         case 'finished':
           this.model.accept();
-        break;
+          break;
         case 'unstarted':
         case 'rejected':
         case 'accepted':
@@ -119,7 +121,7 @@
       this.$el.addClass(newClass);
     },
 
-    rejectStory: function (event) {
+    rejectStory: function () {
       this.model.save( { state: 'rejected' });
     },
 

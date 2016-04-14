@@ -17,12 +17,12 @@ class Tab < ActiveRecord::Base
   validates :visible, inclusion: { in: [true, false] }
   validates :name, uniqueness: { scope: :project_id }
   validates :ord, numericality: { greater_than_or_equal_to: 0 }
-  
+
   belongs_to :project
   has_many :stories, dependent: :destroy
-  
+
   default_scope { order :ord }
-  
+
   after_save do
     project.update_attribute(:updated_at, Time.now)
   end

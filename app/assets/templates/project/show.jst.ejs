@@ -1,62 +1,101 @@
-<div class="modal" id="storyDeletionModal" tabindex="-1" role="dialog" aria-labelledby="storyDeletionLabel" aria-hidden="true">
+<!-- story deletion modal -->
+<div class="modal" id="storyDeletionModal" tabindex="-1"
+  role="dialog" aria-labelledby="storyDeletionLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+
+      <!-- header -->
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="storyDeletionLabel">Confirm deletion</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="storyDeletionLabel">
+          Confirm deletion
+        </h4>
       </div>
+
+      <!-- body -->
       <div class="modal-body">
         Really delete story?
       </div>
+
+      <!-- footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger"
-                id='btn-delete-story'>Delete</button>
+        <button type="button" class="btn btn-danger" id='btn-delete-story'>Delete</button>
       </div>
+
     </div>
   </div>
 </div>
 
-<div class="modal" id="changeCapacityModal" tabindex="-1" role="dialog" aria-labelledby="changeCapacityLabel" aria-hidden="true">
+<!-- change capacity modal -->
+<div class="modal" id="changeCapacityModal" tabindex="-1"
+  role="dialog" aria-labelledby="changeCapacityLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+
+      <!-- header -->
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="changeCapacityLabel">Set new capacity</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="changeCapacityLabel">
+          Set new capacity
+        </h4>
       </div>
+
+      <!-- body -->
       <div class="modal-body">
-          <input type="text" class="slider form-control" id='capacitySlider'
-                 value="" data-slider-min="1"
-                 data-slider-max="12" data-slider-step="1"
-                 data-slider-value="<%= project.escape('capacity') %>"
-                 data-slider-orientation="horizontal" data-slider-selection="after"
-                 data-slider-tooltip="hide">
-          <span id='capacity-value'><%= project.escape('capacity') %></span>
+        <input type="text" class="slider form-control" id='capacitySlider'
+                           value=""
+                           data-slider-min="1"
+                           data-slider-max="12"
+                           data-slider-step="1"
+                           data-slider-value="<%= project.escape('capacity') %>"
+                           data-slider-orientation="horizontal"
+                           data-slider-selection="after"
+                           data-slider-tooltip="hide">
+        <span id='capacity-value'><%= project.escape('capacity') %></span>
       </div>
+
+      <!-- footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"
-                id='btn-set-capacity'>Confirm</button>
+        <button type="button" class="btn btn-primary" id='btn-set-capacity'>Confirm</button>
       </div>
-    </div>
-  </div>
-</div>
 
-<div class="modal" id="projectDeletionModal" tabindex="-1" role="dialog" aria-labelledby="projectDeletionLabel" aria-hidden="true">
+    </div><!-- /div.modal-content -->
+  </div><!-- /div.modal-dialog -->
+</div><!-- /div.modal -->
+
+<!-- project deletion modal -->
+<div class="modal" id="projectDeletionModal" tabindex="-1"
+  role="dialog" aria-labelledby="projectDeletionLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+
+      <!-- header -->
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="projectDeletionLabel">Confirm deletion</h4>
+        <button type="button" class="close" data-dismiss="modal">
+        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="projectDeletionLabel">
+          Confirm deletion
+        </h4>
       </div>
+
+      <!-- body -->
       <div class="modal-body">
         Really delete project?
       </div>
+
+      <!-- footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger"
-                id='btn-delete-project'>Delete</button>
+        <button type="button" class="btn btn-danger" id='btn-delete-project'>Delete</button>
       </div>
+
     </div>
   </div>
 </div>
@@ -65,13 +104,16 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <button type="button" class="navbar-toggle" data-toggle="collapse"
+        data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <p class="navbar-text project-title"><%= project.escape('title') %> (<%= project.escape('capacity') %>)</p>
+      <p class="navbar-text project-title">
+        <%= project.escape('title') %> (<%= project.escape('capacity') %>)
+      </p>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -79,32 +121,43 @@
       <ul class="nav navbar-nav">
         <% project.tabs().each(function (tab) { %>
           <li <%= tab.get('visible') ? 'class="active"' : '' %>
-              id='nav-visible-<%= tab.get('name') %>'>
-              <a href="#"
-                 class='tab-button'
-                 data-target='#tab-column-<%= tab.escape('name') %>'><%= tab.escape('name').toTitleCase() %></a>
+            id='nav-visible-<%= tab.get('name') %>'>
+            <a href="#" class='tab-button' data-target='#tab-column-<%= tab.escape('name') %>'>
+              <%= tab.escape('name').toTitleCase() %></a>
           </li>
         <% }); %>
+
         <li>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Project<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Project
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu" role="menu">
-            <li id='nav-change-capacity'><a href="#">Change capacity</a></li>
+            <li id='nav-change-capacity'>
+              <a href="#">
+                Change capacity
+              </a>
+            </li>
             <!--<li id='nav-add-collaborator'><a href="#">Add collaborator</a></li>-->
             <li class="divider"></li>
             <li id='nav-destroy-project'><a href="#">Delete</a></li>
           </ul>
         </li>
       </ul>
+
+      <!-- add story section -->
       <ul class="nav navbar-nav navbar-right">
         <form class="navbar-form navbar-right" role="form">
           <div class="form-group">
-            <input type="text" class="form-control"
-                   name='story[title]' placeholder="title",
-                   id='input-story-title' required>
+            <input type="text" class="form-control" name='story[title]'
+                   placeholder="title", id='input-story-title' required>
           </div>
-          <button type="submit" class="btn btn-default btn-create-story">Add Story</button>
+          <button type="submit" class="btn btn-default btn-create-story">
+            Add Story
+          </button>
         </form>
       </ul>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

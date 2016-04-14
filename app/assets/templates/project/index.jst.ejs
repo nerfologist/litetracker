@@ -20,14 +20,14 @@
             <h4 class="modal-title" id="projectCreationModalLabel">Create new project</h4>
           </div>
           <div class="modal-body">
-            
+
             <form role='form' id='project-creation-form'>
               <div class='form-group'>
                 <label for=''>Title</label>
                 <input type='text' id='project-title' name='project[title]' class='form-control' value=''></input>
               </div>
             </form>
-            
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- project deletion modal -->
     <div class="modal fade" id="projectDeletionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -54,7 +54,7 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 </div>
 
@@ -71,13 +71,13 @@
         <% projects.each(function (project) { %>
           <tr>
             <td><a href='<%= '#/projects/' + project.id %>'><%= project.escape('title') %></td>
-              <!-- toTidyDatetime: I monkey-patched Date in utils/date_utils.js -->
-              <td><%= new Date(project.escape('created_at')).toTidyDatetime() %></td>
-              <td><%= new Date(project.escape('updated_at')).toTidyDatetime() %></td>
-              <td><button class='btn btn-xs btn-danger' data-toggle="modal" data-target="#projectDeletionModal" data-project-id="<%= project.escape('id') %>">Delete</button></td>
-            </tr>
-            <% }) %>
-          </tbody>
-        </table>
-      </div>
-    </div>
+            <!-- toTidyDatetime: I monkey-patched Date in utils/date_utils.js -->
+            <td><%= new Date(project.escape('created_at')).toTidyDatetime() %></td>
+            <td><%= new Date(project.escape('updated_at')).toTidyDatetime() %></td>
+            <td><button class='btn btn-xs btn-danger' data-toggle="modal" data-target="#projectDeletionModal" data-project-id="<%= project.escape('id') %>">Delete</button></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

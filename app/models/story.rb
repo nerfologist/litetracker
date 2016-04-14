@@ -28,20 +28,20 @@ class Story < ActiveRecord::Base
   validates :ord, numericality: { greater_than_or_equal_to: 0 }
   validates :ord, uniqueness: { scope: :tab }
   validates :maximized, inclusion: { in: [true, false] }
-  
+
   after_initialize :ensure_valid_state
-  
+
   belongs_to :tab
   has_one :project, through: :tab, source: :project
-  
+
   default_scope { order :ord }
-  
+
   after_save do
     project.update_attribute(:updated_at, Time.now)
   end
-  
+
   private
-  
+
   def ensure_valid_state
     self.state ||= 'unstarted'
   end
